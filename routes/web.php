@@ -17,6 +17,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', function() {
-    return view('home');
-})->name('home')->middleware('auth');
+Route::get('/', function() {
+    return view('dashboard');
+})->name('dashboard')->middleware('auth');

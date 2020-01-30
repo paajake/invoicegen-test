@@ -187,5 +187,12 @@
 @section('adminlte_js')
     <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script>
     @stack('js')
+
+    @if(session()->has("success"))
+        <script>
+            toastr.success("{{session()->get("success")}}");
+        </script>
+    @endif
+
     @yield('js')
 @stop
