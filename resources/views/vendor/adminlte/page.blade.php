@@ -1,6 +1,7 @@
 @extends('adminlte::master')
 
 @section('adminlte_css')
+    <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
     @stack('css')
     @yield('css')
 @stop
@@ -170,7 +171,7 @@
 
         @hasSection('footer')
         <footer class="main-footer">
-
+            &copy; {{date("Y")}} <b>Invoice</b>Gen
             @yield('footer')
         </footer>
         @endif
@@ -191,6 +192,24 @@
     @if(session()->has("success"))
         <script>
             toastr.success("{{session()->get("success")}}");
+        </script>
+    @endif
+
+    @if(session()->has("info"))
+        <script>
+            toastr.info("{{session()->get("info")}}");
+        </script>
+    @endif
+
+    @if(session()->has("warning"))
+        <script>
+            toastr.warning("{{session()->get("warning")}}");
+        </script>
+    @endif
+
+    @if(session()->has("alert"))
+        <script>
+            toastr.alert("{{session()->get("alert")}}");
         </script>
     @endif
 

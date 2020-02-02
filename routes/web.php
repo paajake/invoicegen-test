@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Auth::routes(['register' => false]);
 
-Auth::routes();
+Route::get('/', 'DashboardController@index')->name('dashboard')->middleware('auth');
 
-Route::get('/', function() {
-    return view('dashboard');
-})->name('dashboard')->middleware('auth');
+//Route::get('/users', "UsersController@index")->middleware('auth')->name('users.index');
+//Route::get('/users/create', "UsersController@index")->middleware('auth')->name('users.create');
+//Route::delete('/users', "UsersController@destroy")->middleware('auth')->name('users.destroy');
+
+Route::resource("users", "UsersController")->middleware('auth');

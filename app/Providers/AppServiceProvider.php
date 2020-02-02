@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+use Illuminate\Support\Facades\Cache;
 use \App\User;
 
 
@@ -29,9 +30,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Dispatcher $events)
     {
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
+
             $event->menu->add('MAIN NAVIGATION');
 
             $event->menu->add(['header' => 'Invoicing TOOLS']);
+            $event->menu->add([
+                'text' => 'Dashboard',
+                'url'  => route('dashboard'),
+                'icon' => 'fas fa-fw fa-tachometer-alt',
+            ]);
+
             $event->menu->add([
                 'text' => 'Invoices',
                 'url'  => 'admin/settings',
@@ -54,9 +62,10 @@ class AppServiceProvider extends ServiceProvider
 
             $event->menu->add([
                 'text'        => 'Users',
-                'url'         => 'admin/users',
+                'url'         => route('users.index'),
+                'active'      => [route('users.index'),route('users.create')],
                 'icon'        => 'fas fa-fw fa-user-friends',
-                'label'       => User::count(),
+                'label'       => Cache::remember('users_count',60*60*12, function (){return User::count();}),
                 'label_color' => 'success',
             ]);
 
