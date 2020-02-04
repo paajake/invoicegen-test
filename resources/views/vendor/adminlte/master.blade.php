@@ -16,6 +16,7 @@
     @yield('adminlte_css_pre')
 
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="icon" type="image/png" href="{{URL::asset('/images/logo/logo.png')}}">
 
     @yield('adminlte_css')
 

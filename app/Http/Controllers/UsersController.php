@@ -79,7 +79,6 @@ class UsersController extends Controller
 
         return redirect(route('users.index'))
                 ->withSuccess("User Successfully Created!");
-
     }
 
     /**
@@ -124,9 +123,8 @@ class UsersController extends Controller
      */
     public function destroy(Request $request)
     {
-         $number_of_deleted_users = User::destroy( $request->get("id"));
+        $num_of_del_users = User::destroy( $request->get("id"));
 
-        return Cache::decrement('users_count',$number_of_deleted_users);
-
+        return Cache::decrement('users_count',$num_of_del_users);
     }
 }

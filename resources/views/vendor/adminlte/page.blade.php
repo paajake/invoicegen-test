@@ -1,7 +1,6 @@
 @extends('adminlte::master')
 
 @section('adminlte_css')
-    <link rel="icon" href="{{ URL::asset('favicon.ico') }}" type="image/x-icon"/>
     @stack('css')
     @yield('css')
 @stop
