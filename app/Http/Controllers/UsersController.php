@@ -68,12 +68,24 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function store(StoreUser $request)
     {
-        User::create($request->validated());
+        $validated_values = $request->validated();
+        unset($validated_values['image']);
+        $image_name = null;
+
+        if ($request->hasFile('image')) {
+            $image_name =  time().'.'.$request->file('image')->clientExtension();
+            $request->file('image')->storeAs('images/uploads', $image_name);
+        }
+
+        $validated_values['image'] = $image_name;
+
+        User::create($validated_values);
 
         Cache::increment('users_count');
 

@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return $this->attributes['password'] = Hash::needsRehash($value) ? Hash::make($value) : $value;
     }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords($value);
+    }
 }
