@@ -35,6 +35,7 @@
                     <tr>
                         <th>No</th>
                         <th>Name</th>
+                        <th>Image</th>
                         <th>Email</th>
                         <th>Created</th>
                         <th width="100px">Action</th>
@@ -59,10 +60,12 @@
             $('#usersDataTable').DataTable({
                 processing: true,
                 serverSide: true,
+                stateSave: true,
                 ajax: "{{ route('users.index') }}",
                 columns: [
                     {data: 'rownum', name: 'rownum', searchable: false},
                     {data: 'name', name: 'name'},
+                    {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'email', name: 'email'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -96,19 +99,12 @@
                             //Remove Row
                             $('#'+button_id).parent().parent().remove()
                             toastr.success("User Successfully Deleted!");
-
-                            //document.getElementById("#usersDataTable").deleteRow(i);
                         },
                         error: function (response) {
                             toastr.error("Something went wrong.");
                             console.log(response);
                         },
                     });
-                    // Swal.fire(
-                    //     'Deleted!',
-                    //     'User successfully deleted.',
-                    //     'success'
-                    // );
                 }else{
                     // Swal.fire(
                     //     "Cancelled",

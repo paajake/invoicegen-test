@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
@@ -38,10 +39,15 @@ class UsersController extends Controller
             'id',
             'name',
             'email',
+            'image',
             'created_at'
         ])->where("id","!=",auth()->user()->id);
 
         return Datatables::of($data)
+            ->editColumn('image', function ($user) {
+                $url = asset("storage/images/uploads/".$user->image);
+                return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />';
+            })
             ->editColumn('created_at', function ($user) {
                 return date('d/m/y H:i', strtotime($user->created_at) );
             })
@@ -51,7 +57,7 @@ class UsersController extends Controller
             ->addColumn('action', function($row){
                 return "<button type='button' id='row_$row->id' onclick='deleteUser($row->id, this.id)' class='btn btn-danger btn-sm' data-toggle='ooltip' title='Delete User'><i class='fas fa-trash'></i> <span class='d-none d-md-inline'>Delete</span></button>";
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['image','action'])
             ->make(true);
     }
 
@@ -80,11 +86,10 @@ class UsersController extends Controller
 
         if ($request->hasFile('image')) {
             $image_name =  time().'.'.$request->file('image')->clientExtension();
-            $request->file('image')->storeAs('images/uploads', $image_name);
+            $request->file('image')->storeAs('public/images/uploads', $image_name);
         }
 
         $validated_values['image'] = $image_name;
-
         User::create($validated_values);
 
         Cache::increment('users_count');
@@ -112,31 +117,34 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        //abort if not current user
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param User $user
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        //abort if not current user
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Request $request
+     * @param User $user
      * @return bool|int
+     * @throws \Exception
      */
-    public function destroy(Request $request)
+    public function destroy(User $user)
     {
-        $num_of_del_users = User::destroy( $request->get("id"));
-
-        return Cache::decrement('users_count',$num_of_del_users);
+        if ($user->image != "default.png"){
+            Storage::delete("public/images/uploads/$user->image");
+        }
+        $user->delete();
+        return Cache::decrement('users_count');
     }
 }

@@ -65,7 +65,7 @@ class AppServiceProvider extends ServiceProvider
                 'url'         => route('users.index'),
                 'active'      => [route('users.index'),route('users.create')],
                 'icon'        => 'fas fa-fw fa-user-friends',
-                'label'       => Cache::remember('users_count',60*60*12, function (){return User::count();}),
+                'label'       => Cache::remember('users_count', config('constants.time.half_day'), function (){return User::count();}),
                 'label_color' => 'success',
             ]);
 
