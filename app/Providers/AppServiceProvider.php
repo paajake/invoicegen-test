@@ -8,7 +8,6 @@ use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
 use Illuminate\Support\Facades\Cache;
 use \App\User;
 
-
 class AppServiceProvider extends ServiceProvider
 {
     /**

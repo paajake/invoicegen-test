@@ -7,10 +7,6 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    protected function setUp(): void {
-        parent::setUp();
-        //$this->withoutExceptionHandling();
-    }
     /**
      * A basic test example.
      * @test

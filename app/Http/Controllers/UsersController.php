@@ -31,7 +31,8 @@ class UsersController extends Controller
     /**
      * Returns Datatable for Users.
      */
-    private function usersDataTable(){
+    private function usersDataTable()
+    {
         DB::statement(DB::raw('set @rownum=0'));
 
         $data = User::select([
@@ -41,7 +42,7 @@ class UsersController extends Controller
             'email',
             'image',
             'created_at'
-        ])->where("id","!=",auth()->user()->id);
+        ])->where("id", "!=", auth()->user()->id);
 
         return Datatables::of($data)
             ->editColumn('image', function ($user) {
