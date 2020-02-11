@@ -7,15 +7,19 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    protected function setUp(): void {
+        parent::setUp();
+        //$this->withoutExceptionHandling();
+    }
     /**
      * A basic test example.
+     * @test
      *
      * @return void
      */
-    public function testBasicTest()
+    public function guest_cant_access_dashboard()
     {
         $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $response->assertRedirect("/login");
     }
 }
