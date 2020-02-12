@@ -75,15 +75,14 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param StoreUser $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     * @throws \Exception
      */
     public function store(StoreUser $request)
     {
         $validated_values = $request->validated();
         unset($validated_values['image']);
-        $image_name = null;
+        $image_name = "default.png";
 
         if ($request->hasFile('image')) {
             $image_name =  time().'.'.$request->file('image')->clientExtension();
@@ -105,10 +104,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+//    public function show($id)
+//    {
+//        //
+//    }
 
     /**
      * Show the form for editing the specified resource.
@@ -116,10 +115,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //abort if not current user
-    }
+//    public function edit($id)
+//    {
+//        //abort if not current user
+//    }
 
     /**
      * Update the specified resource in storage.
@@ -128,10 +127,10 @@ class UsersController extends Controller
      * @param User $user
      * @return void
      */
-    public function update(Request $request, User $user)
-    {
-        //abort if not current user
-    }
+//    public function update(Request $request, User $user)
+//    {
+//        //abort if not current user
+//    }
 
     /**
      * Remove the specified resource from storage.
