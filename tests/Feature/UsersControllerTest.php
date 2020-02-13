@@ -33,15 +33,15 @@ class UsersControllerTest extends TestCase
     /**
      * @test
      */
-    public function user_can_access_users_data(){
-
+    public function user_can_access_users_data()
+    {
         $random_user = factory("App\User", 8)->create()->random();
         $user = factory("App\User")->create();
 
         $response = $this->actingAs($user)->ajaxGet("/users");
 
         $response->assertStatus(200)
-            ->assertJsonCount(8,"data")
+            ->assertJsonCount(8, "data")
             ->assertJsonFragment([
                 "name" => $random_user->name,
                 "email"=> $random_user->email,
@@ -53,7 +53,8 @@ class UsersControllerTest extends TestCase
     /**
      * @test
      */
-    public function user_can_add_user(){
+    public function user_can_add_user()
+    {
         $user = factory("App\User")->create();
         $faker = Factory::create();
         $fake_name = $faker->name;
@@ -73,12 +74,11 @@ class UsersControllerTest extends TestCase
         $response = $this->actingAs($user)->ajaxGet("/users");
 
         $response->assertStatus(200)
-            ->assertJsonCount(1,"data")
+            ->assertJsonCount(1, "data")
             ->assertJsonFragment([
                 "name" => $fake_name,
                 "email"=> $fake_email,
             ]);
-
     }
 
     /**
@@ -89,17 +89,16 @@ class UsersControllerTest extends TestCase
         $user = factory("App\User")->create();
 
         $this->actingAs($user)
-            ->post("/users/$random_user->id",["id" => $user->id, "_method" => 'DELETE'] )
+            ->post("/users/$random_user->id", ["id" => $user->id, "_method" => 'DELETE'] )
             ->assertStatus(200);
 
         $response = $this->actingAs($user)->ajaxGet("/users");
 
         $response->assertStatus(200)
-            ->assertJsonCount(2,"data")
+            ->assertJsonCount(2, "data")
             ->assertJsonMissing([
                 "name" => $random_user->name,
-                "email"=> $random_user->email,
+                "email" => $random_user->email,
             ]);
-
     }
 }
