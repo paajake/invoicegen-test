@@ -84,7 +84,8 @@ class UsersControllerTest extends TestCase
     /**
      * @test
      */
-    public function user_can_delete_users(){
+    public function user_can_delete_users()
+    {
         $random_user = factory("App\User", 3)->create()->random();
         $user = factory("App\User")->create();
 
