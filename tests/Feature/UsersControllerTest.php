@@ -43,7 +43,7 @@ class UsersControllerTest extends TestCase
         $response = $this->actingAs($user)->ajaxGet("/users");
 
         $response->assertStatus(200)
-            ->assertJsonCount(10, "data")
+            ->assertJsonCount(8, "data")
             ->assertJsonFragment([
                 "name" => $random_user->name,
                 "email"=> $random_user->email,
