@@ -71,7 +71,7 @@ return [
 
         'heroku' => [
             'driver' => 'mysql',
-            'host' => $host,
+            'host' => $server,
             'database' => $database,
             'username' => $username,
             'password' => $password,
