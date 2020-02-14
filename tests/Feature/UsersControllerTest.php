@@ -57,7 +57,7 @@ class UsersControllerTest extends TestCase
         $user = factory("App\User")->create();
         $faker = Factory::create();
         $fake_name = $faker->name;
-        $fake_email = $faker->email;
+        $fake_email = $faker->unique()->safeEmail;
         $fake_password = $faker->password;
 
         $this->actingAs($user)
