@@ -12,7 +12,7 @@ services:
 
 cache:
   directories:
-    - vendor
+    - $HOME/.composer/cache
 
 before_script:
   - cp .env.travis .env
