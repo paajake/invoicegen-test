@@ -31,6 +31,8 @@ class UsersControllerTest extends TestCase
     }
 
     /**
+     * Test for users data
+     *
      * @test
      */
     public function user_can_access_users_data()
