@@ -18,7 +18,6 @@ class UsersControllerTest extends TestCase
      */
     public function user_can_view_index_page()
     {
-        $this->withExceptionHandling();
         $user = factory("App\User")->create();
 
         $response = $this->actingAs($user)->get('/users');
