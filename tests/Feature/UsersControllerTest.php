@@ -80,6 +80,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
+     * Test for Deleting Users
      * @test
      */
     public function user_can_delete_users()
