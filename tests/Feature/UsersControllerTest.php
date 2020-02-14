@@ -46,8 +46,6 @@ class UsersControllerTest extends TestCase
                 "name" => $random_user->name,
                 "email"=> $random_user->email,
             ]);
-
-
     }
 
     /**
