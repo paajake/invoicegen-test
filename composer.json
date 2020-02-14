@@ -12,12 +12,12 @@
         "fideloper/proxy": "^4.0",
         "jeroennoten/laravel-adminlte": "^3.0",
         "laravel/framework": "^6.2",
+        "fzaninotto/faker": "^1.4",
         "laravel/tinker": "^2.0",
         "yajra/laravel-datatables-oracle": "^9.8"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
-        "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
         "nunomaduro/larastan": "^0.5.1",
