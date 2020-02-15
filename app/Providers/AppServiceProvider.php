@@ -73,7 +73,7 @@ class AppServiceProvider extends ServiceProvider
 
             $event->menu->add([
                 'text' => 'profile',
-                'url'  => route("users.show",["user" => auth()->user()->id]),
+                'url'  => route("users.edit",["user" => auth()->user()->id]),
                 'icon' => 'fas fa-fw fa-user',
             ]);
 

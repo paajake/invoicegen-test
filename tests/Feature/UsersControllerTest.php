@@ -124,9 +124,9 @@ class UsersControllerTest extends TestCase
                 "password" => $fake_password,
                 "password_confirmation" => $fake_password,
             ])
-            ->assertRedirect("users/$user->id");
+            ->assertRedirect("users/$user->id/edit");
 
-        $response = $this->get("users/$user->id");
+        $response = $this->get("users/$user->id/edit");
 
         $response->assertSeeInOrder([$fake_name,$fake_email, "Edit Account"]);
     }

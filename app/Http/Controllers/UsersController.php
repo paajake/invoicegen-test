@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\View\View;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Cache;
 
@@ -103,26 +104,15 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show the form for editing the specified resource.
      *
      * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
-    public function show(User $user)
+    public function edit(User $user)
     {
         return view("users.profile", compact("user"));
     }
-
-//    /**
-//     * Show the form for editing the specified resource.
-//     *
-//     * @param  int  $id
-//     * @return Response
-//     */
-//    public function edit($id)
-//    {
-//        //abort if not current user
-//    }
 
     /**
      * Update the specified resource in storage.
@@ -148,7 +138,7 @@ class UsersController extends Controller
         $user->save();
 
 
-        return redirect(route('users.show',["user" => $user]))
+        return redirect(route('users.edit', ["user" => $user]))
             ->withSuccess("Account Successfully Updated!");
 
     }
