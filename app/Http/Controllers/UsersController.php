@@ -46,7 +46,8 @@ class UsersController extends Controller
 
         return Datatables::of($data)
             ->editColumn('image', function ($user) {
-                $url = asset("storage/images/uploads/".$user->image);
+                //$url = asset("storage/images/uploads/".$user->image);
+                $url = Storage::disk("s3")->url("public/images/uploads/".$user->image);
                 return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />';
             })
             ->editColumn('created_at', function ($user) {
@@ -56,7 +57,9 @@ class UsersController extends Controller
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);
             })
             ->addColumn('action', function($row){
-                return "<button type='button' id='row_$row->id' onclick='deleteUser($row->id, this.id)' class='btn btn-danger btn-sm' data-toggle='ooltip' title='Delete User'><i class='fas fa-trash'></i> <span class='d-none d-md-inline'>Delete</span></button>";
+                return "<button type='button' id='row_$row->id' onclick='deleteUser($row->id, this.id)'
+                                class='btn btn-danger btn-sm' data-toggle='ooltip' title='Delete User'>
+                                <i class='fas fa-trash'></i> <span class='d-none d-md-inline'>Delete</span></button>";
             })
             ->rawColumns(['image','action'])
             ->make(true);
@@ -86,7 +89,12 @@ class UsersController extends Controller
 
         if ($request->hasFile('image')) {
             $image_name =  time().'.'.$request->file('image')->clientExtension();
-            $request->file('image')->storeAs('public/images/uploads', $image_name);
+            $request->file('image')->storeAs('public/images/uploads', $image_name,
+                                                        [
+                                                            "disk" => "s3",
+                                                            "visibility" => "public"
+                                                        ]
+                                                 );
         }
 
         $validated_values['image'] = $image_name;
@@ -142,7 +150,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         if ($user->image != "default.png"){
-            Storage::delete("public/images/uploads/$user->image");
+            Storage::disk("s3")->delete("public/images/uploads/$user->image");
         }
         $user->delete();
         return Cache::decrement('users_count');
