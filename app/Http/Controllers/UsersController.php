@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -46,7 +48,6 @@ class UsersController extends Controller
 
         return Datatables::of($data)
             ->editColumn('image', function ($user) {
-                //$url = asset("storage/images/uploads/".$user->image);
                 $url = Storage::url("public/images/uploads/".$user->image);
                 return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />';
             })
@@ -104,20 +105,20 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-//    public function show($id)
-//    {
-//        //
-//    }
+    public function show(User $user)
+    {
+        return view("users.profile", compact("user"));
+    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param  int  $id
+//     * @return Response
+//     */
 //    public function edit($id)
 //    {
 //        //abort if not current user
@@ -126,14 +127,31 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param StoreUser $request
      * @param User $user
-     * @return void
+     * @return RedirectResponse
      */
-//    public function update(Request $request, User $user)
-//    {
-//        //abort if not current user
-//    }
+    public function update(StoreUser $request, User $user)
+    {
+        $image_name = $user->image;
+
+        if ($request->hasFile('image')) {
+            $image_name =  time().'.'.$request->file('image')->clientExtension();
+            $request->file('image')->storeAs('public/images/uploads', $image_name, ["visibility" => "public"]);
+        }
+
+        $user->password = $request->validated()["password"];
+        $user->name = $request->validated()["name"];
+        $user->email = $request->validated()["email"];
+        $user->image = $image_name;
+
+        $user->save();
+
+
+        return redirect(route('users.show',["user" => $user]))
+            ->withSuccess("Account Successfully Updated!");
+
+    }
 
     /**
      * Remove the specified resource from storage.

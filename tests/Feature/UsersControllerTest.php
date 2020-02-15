@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -10,6 +9,7 @@ use Tests\TestCase;
 class UsersControllerTest extends TestCase
 {
     use RefreshDatabase;
+    use WithFaker;
 
     /**
      * Test Index Page.
@@ -55,10 +55,10 @@ class UsersControllerTest extends TestCase
     public function user_can_add_user()
     {
         $user = factory("App\User")->create();
-        $faker = Factory::create();
-        $fake_name = $faker->name;
-        $fake_email = $faker->unique()->safeEmail;
-        $fake_password = $faker->password;
+
+        $fake_name = $this->faker->name;
+        $fake_email = $this->faker->unique()->safeEmail;
+        $fake_password = $this->faker->password;
 
         $this->actingAs($user)
             ->post("/users",
@@ -101,5 +101,33 @@ class UsersControllerTest extends TestCase
                 "name" => $random_user->name,
                 "email" => $random_user->email,
             ]);
+    }
+
+    /**
+     * Test for Updating User
+     * @test
+     */
+    public function user_can_update_account()
+    {
+        $user = factory("App\User")->create();
+
+        $fake_name = $this->faker->name;
+        $fake_email = $this->faker->unique()->safeEmail;
+        $fake_password = $this->faker->password;
+
+        $this->actingAs($user)->post("/users/$user->id",
+            [
+                "id" => $user->id,
+                "_method" => 'PUT',
+                "name" => $fake_name,
+                "email" => $fake_email,
+                "password" => $fake_password,
+                "password_confirmation" => $fake_password,
+            ])
+            ->assertRedirect("users/$user->id");
+
+        $response = $this->get("users/$user->id");
+
+        $response->assertSeeInOrder([$fake_name,$fake_email, "Edit Account"]);
     }
 }

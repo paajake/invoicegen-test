@@ -20,7 +20,7 @@
                     <!-- /.card-tools -->
                 </div>
                 <div class="card-body">
-                    <p class="mb-0">Add New User</p>
+                    <p class="mb-0">Edit Your Account</p>
                 </div>
             </div>
         </div>

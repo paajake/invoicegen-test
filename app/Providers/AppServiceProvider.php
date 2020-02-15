@@ -73,15 +73,15 @@ class AppServiceProvider extends ServiceProvider
 
             $event->menu->add([
                 'text' => 'profile',
-                'url'  => 'admin/settings',
+                'url'  => route("users.show",["user" => auth()->user()->id]),
                 'icon' => 'fas fa-fw fa-user',
             ]);
 
-            $event->menu->add([
-                'text' => 'change_password',
-                'url'  => 'admin/settings',
-                'icon' => 'fas fa-fw fa-lock',
-            ]);
+//            $event->menu->add([
+//                'text' => 'change_password',
+//                'url'  => 'admin/settings',
+//                'icon' => 'fas fa-fw fa-lock',
+//            ]);
 
         });
     }
