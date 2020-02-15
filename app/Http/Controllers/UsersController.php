@@ -47,7 +47,7 @@ class UsersController extends Controller
         return Datatables::of($data)
             ->editColumn('image', function ($user) {
                 //$url = asset("storage/images/uploads/".$user->image);
-                $url = Storage::disk("s3")->url("public/images/uploads/".$user->image);
+                $url = Storage::url("public/images/uploads/".$user->image);
                 return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />';
             })
             ->editColumn('created_at', function ($user) {
@@ -89,12 +89,7 @@ class UsersController extends Controller
 
         if ($request->hasFile('image')) {
             $image_name =  time().'.'.$request->file('image')->clientExtension();
-            $request->file('image')->storeAs('public/images/uploads', $image_name,
-                                                        [
-                                                            "disk" => "s3",
-                                                            "visibility" => "public"
-                                                        ]
-                                                 );
+            $request->file('image')->storeAs('public/images/uploads', $image_name, ["visibility" => "public"]);
         }
 
         $validated_values['image'] = $image_name;
@@ -150,7 +145,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         if ($user->image != "default.png"){
-            Storage::disk("s3")->delete("public/images/uploads/$user->image");
+            Storage::delete("public/images/uploads/$user->image");
         }
         $user->delete();
         return Cache::decrement('users_count');
