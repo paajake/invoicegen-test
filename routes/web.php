@@ -19,4 +19,5 @@ Route::get('/', 'DashboardController@index')->name('dashboard')->middleware('aut
 //Route::get('/users/create', "UsersController@index")->middleware('auth')->name('users.create');
 //Route::delete('/users', "UsersController@destroy")->middleware('auth')->name('users.destroy');
 
+Route::resource("ranks", "RankController")->middleware('auth');
 Route::resource("users", "UsersController")->middleware('auth');

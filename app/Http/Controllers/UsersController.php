@@ -60,7 +60,7 @@ class UsersController extends Controller
             })
             ->addColumn('action', function($row){
                 return "<button type='button' id='row_$row->id' onclick='deleteUser($row->id, this.id)'
-                                class='btn btn-danger btn-sm' data-toggle='ooltip' title='Delete User'>
+                                class='btn btn-danger btn-sm' data-toggle='tooltip' title='Delete User'>
                                 <i class='fas fa-trash'></i> <span class='d-none d-md-inline'>Delete</span></button>";
             })
             ->rawColumns(['image','action'])

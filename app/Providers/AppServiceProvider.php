@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Rank;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
@@ -46,9 +47,25 @@ class AppServiceProvider extends ServiceProvider
             ]);
 
             $event->menu->add([
-                'text' => 'Lawyers',
-                'url'  => 'admin/settings',
-                'icon' => 'fas fa-fw fa-gavel',
+                'text' => 'Staff',
+                'icon' => 'fas fa-fw fa-user-friends',
+                'active'      => ["ranks/*","lawyers/*"],
+                'submenu' => [
+                    [
+                        'text' => 'Lawyers',
+                        'url'  => 'admin/settings',
+                        'icon' => 'fas fa-fw fa-gavel',
+                    ],
+                    [
+                        'text' => 'Ranks',
+                        'icon' => 'fas fa-fw fa-university',
+                        'url'  => route("ranks.index"),
+                        'label' => Cache::remember('ranks_count', config('constants.time.half_day'),
+                                                                    function (){
+                                                                        return Rank::count();
+                                                                    }),
+                    ],
+                ]
             ]);
 
             $event->menu->add([
