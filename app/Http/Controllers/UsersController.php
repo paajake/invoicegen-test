@@ -19,7 +19,7 @@ class UsersController extends Controller
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      * @throws \Exception
      */
     public function index(Request $request)
@@ -70,7 +70,7 @@ class UsersController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -81,7 +81,7 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreUser $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse
      */
     public function store(StoreUser $request)
     {

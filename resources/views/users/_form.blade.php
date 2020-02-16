@@ -1,5 +1,4 @@
 {{--                    <p class="login-box-msg">{{ __('adminlte::adminlte.register_message') }}</p>--}}
-{{--<form action="{{ route("users.store") }}" method="post" enctype="multipart/form-data">--}}
 @if(isset($user))
     <form action="{{ route("users.update", ["user" => $user->id]) }}" method="post" enctype="multipart/form-data">
     @method("PUT")
@@ -9,7 +8,7 @@
     {{ csrf_field() }}
 
     <div class="input-group mb-3">
-        <img src="{{ Storage::url("public/images/uploads/".($user->image ?? "default.png") )}}" id="preview" style="width: 130px" class="img-thumbnail rounded-circle m-auto">
+        <img src="{{ Storage::url("public/images/uploads/".($user->image ?? "default.png") )}}" id="preview" style="width: 150px" class="img-thumbnail rounded m-auto">
     </div>
 
     <div class="input-group mb-3">

@@ -18,4 +18,16 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
         $response->assertRedirect("/login");
     }
+
+    /**
+     * A basic test example.
+     * @test
+     *
+     * @return void
+     */
+    public function guest_cant_register_thyself()
+    {
+        $response = $this->get('/register');
+        $response->assertStatus(404);
+    }
 }
