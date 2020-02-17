@@ -55,7 +55,7 @@ class RankController extends Controller
             ->addColumn('action', function($row)
             {
                 return "<a href='".route("ranks.edit",["rank" => $row->id])."'
-                        class='btn btn-success btn-sm' data-toggle='tooltip' title='Edit Rank'>
+                        class='btn btn-success btn-sm mr-1' data-toggle='tooltip' title='Edit Rank'>
                         <i class='fas fa-edit'></i> <span class='d-none d-md-inline'>Edit</span></a>
 
                         <button type='button' id='row_$row->id' onclick='deleteRank($row->id, this.id)'
