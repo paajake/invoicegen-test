@@ -36,7 +36,7 @@
                         <th>No</th>
                         <th>Rank</th>
                         <th>Rate</th>
-                        <th>Created</th>
+                        <th>Updated</th>
                         <th width="100px">Action</th>
                     </tr>
                     </thead>
@@ -64,7 +64,7 @@
                     {data: 'rownum', name: 'rownum', searchable: false},
                     {data: 'name', name: 'name'},
                     {data: 'rate', name: 'rate'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'updated_at', name: 'updated_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

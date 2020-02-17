@@ -37,7 +37,7 @@
                         <th>Name</th>
                         <th>Image</th>
                         <th>Email</th>
-                        <th>Created</th>
+                        <th>Updated</th>
                         <th width="100px">Action</th>
                     </tr>
                     </thead>
@@ -67,7 +67,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'email', name: 'email'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'updated_at', name: 'updated_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

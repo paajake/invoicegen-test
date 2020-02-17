@@ -44,16 +44,16 @@ class UsersController extends Controller
             'name',
             'email',
             'image',
-            'created_at'
+            'updated_at'
         ])->where("id", "!=", auth()->user()->id);
 
         return Datatables::of($data)
             ->editColumn('image', function ($user) {
                 $url = Storage::url("public/images/uploads/".$user->image);
-                return '<img src='.$url.' border="0" width="40" class="img-rounded" align="center" />';
+                return '<img src='.$url.' border="0" width="40" class="img-rounded m-auto"/>';
             })
-            ->editColumn('created_at', function ($user) {
-                return date('d/m/y H:i', strtotime($user->created_at) );
+            ->editColumn('updated_at', function ($user) {
+                return date('d/m/y H:i', strtotime($user->updated_at) );
             })
             ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);

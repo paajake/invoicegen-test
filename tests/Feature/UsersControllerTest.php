@@ -26,7 +26,7 @@ class UsersControllerTest extends TestCase
             ->assertViewIs("users.index")
             ->assertSeeText("Manage the Users of the Application.")
             ->assertSeeText("Add")
-            ->assertSeeTextInOrder(["No", "Name", "Image", "Email", "Created", "Action"]);
+            ->assertSeeTextInOrder(["No", "Name", "Image", "Email", "Updated", "Action"]);
     }
 
     /**
@@ -50,7 +50,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     *
+     * @test
      */
     public function user_can_add_user()
     {
@@ -69,15 +69,17 @@ class UsersControllerTest extends TestCase
                     "password" => $fake_password,
                     "password_confirmation" => $fake_password,
                 ])
-            ->assertRedirect("/users");
+            ->assertRedirect("/users")
+            ->assertSessionHas("success","User Successfully Created!");
+
 
         $response = $this->actingAs($user)->ajaxGet("/users");
 
         $response->assertStatus(200)
             ->assertJsonCount(1, "data")
             ->assertJsonFragment([
-                "name" => $fake_name,
-                "email"=> $fake_email,
+                "name" => e($fake_name),
+                "email"=> e($fake_email),
             ]);
     }
 
@@ -99,14 +101,14 @@ class UsersControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonCount(2, "data")
             ->assertJsonMissing([
-                "name" => $random_user->name,
-                "email" => $random_user->email,
+                "name" => e($random_user->name),
+                "email" => e($random_user->email),
             ]);
     }
 
     /**
      * Test for Updating User
-     *
+     * @test
      */
     public function user_can_update_account()
     {
@@ -126,10 +128,11 @@ class UsersControllerTest extends TestCase
                 "password" => $fake_password,
                 "password_confirmation" => $fake_password,
             ])
-            ->assertRedirect("users/$user->id/edit");
+            ->assertRedirect("users/$user->id/edit")
+            ->assertSessionHas("success","Account Successfully Updated!");
 
         $response = $this->actingAs($user)->get("users/$user->id/edit");
 
-        $response->assertSeeInOrder([$fake_name,$fake_email, "Edit Account"]);
+        $response->assertSeeInOrder([e($fake_name), e($fake_email), "Edit Account"]);
     }
 }

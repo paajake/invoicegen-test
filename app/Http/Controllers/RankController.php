@@ -39,13 +39,13 @@ class RankController extends Controller
                                 'id',
                                 'name',
                                 'rate',
-                                'created_at'
+                                'updated_at'
                             ]);
 
         return Datatables::of($data)
-            ->editColumn('created_at', function ($rank)
+            ->editColumn('updated_at', function ($rank)
             {
-                return date('d/m/y H:i', strtotime($rank->created_at) );
+                return date('d/m/y H:i', strtotime($rank->updated_at) );
             })
             ->filterColumn('created_at', function ($query, $keyword)
             {

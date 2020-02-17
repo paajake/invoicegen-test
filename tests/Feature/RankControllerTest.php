@@ -26,7 +26,7 @@ class RankControllerTest extends TestCase
             ->assertViewIs("ranks.index")
             ->assertSeeText("Manage Lawyer Ranks")
             ->assertSeeText("Add")
-            ->assertSeeTextInOrder(["No", "Rank", "Rate", "Created", "Action"]);
+            ->assertSeeTextInOrder(["No", "Rank", "Rate", "Updated", "Action"]);
 
     }
 
@@ -43,8 +43,8 @@ class RankControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonCount(8, "data")
             ->assertJsonFragment([
-                "name" => $random_rank->name,
-                "rate"=> "$random_rank->rate",
+                "name" => e($random_rank->name),
+                "rate"=> number_format($random_rank->rate, 2, '.', ""),
             ]);
     }
 
@@ -60,18 +60,19 @@ class RankControllerTest extends TestCase
         $this->actingAs($user)
             ->post("/ranks",
                 [
-                    "name" => $fake_rank,
-                    "rate" => number_format($fake_rate,2),
+                    "name" => e($fake_rank),
+                    "rate" => number_format($fake_rate, 2, '.', ""),
                 ])
-            ->assertRedirect("ranks");
+            ->assertRedirect("ranks")
+            ->assertSessionHas("success","Rank Successfully Created!");
 
         $response = $this->actingAs($user)->ajaxGet("/ranks");
 
         $response->assertStatus(200)
             ->assertJsonCount(1, "data")
             ->assertJsonFragment([
-                "name" => $fake_rank,
-                "rate"=> number_format($fake_rate, 2),
+                "name" => e($fake_rank),
+                "rate"=> number_format($fake_rate, 2, '.', ""),
             ]);
     }
 
@@ -91,8 +92,8 @@ class RankControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonCount(2, "data")
             ->assertJsonMissing([
-                "name" => $random_rank->name,
-                "rate"=> "$random_rank->rate",
+                "name" => e($random_rank->name),
+                "rate"=> number_format($random_rank->rate, 2, '.', ""),
             ]);
     }
 
@@ -111,10 +112,12 @@ class RankControllerTest extends TestCase
             [
                 "id" => $random_rank->id,
                 "_method" => 'PUT',
-                "name" => $fake_rank,
-                "rate" => $fake_rate,
+                "name" => e($fake_rank),
+                "rate" => number_format($fake_rate, 2, '.', ""),
             ])
-            ->assertRedirect("ranks/");
+            ->assertRedirect("ranks/")
+            ->assertSessionHas("success","Rank Successfully Updated!");
+        ;
 
         $response = $this->actingAs($user)->get("ranks/$random_rank->id/edit");
 
