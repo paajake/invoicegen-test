@@ -55,7 +55,7 @@ class ClientControllerTest extends TestCase
     public function user_can_add_client(){
         $user = factory("App\User")->create();
 
-        $fake_name = $this->faker->name;
+        $fake_name = e($this->faker->name);
         $fake_phone = $this->faker->e164PhoneNumber;
         $fake_email = $this->faker->unique()->safeEmail;
 
@@ -110,7 +110,7 @@ class ClientControllerTest extends TestCase
 
         $random_client = factory("App\Client", 5)->create()->random();
 
-        $fake_name = $this->faker->name;
+        $fake_name = e($this->faker->name);
         $fake_phone = $this->faker->e164PhoneNumber;
         $fake_email = $this->faker->unique()->safeEmail;
 
