@@ -128,6 +128,6 @@ class ClientControllerTest extends TestCase
 
         $response = $this->actingAs($user)->get("clients/$random_client->id/edit");
 
-        $response->assertSeeInOrder([$fake_name, $fake_email, $fake_phone, "Edit Client"]);
+        $response->assertSeeInOrder([e($fake_name), $fake_email, $fake_phone, "Edit Client"]);
     }
 }

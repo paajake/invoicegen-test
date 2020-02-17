@@ -121,6 +121,6 @@ class RankControllerTest extends TestCase
 
         $response = $this->actingAs($user)->get("ranks/$random_rank->id/edit");
 
-        $response->assertSeeInOrder([$fake_rank,$fake_rate, "Edit Rank"]);
+        $response->assertSeeInOrder([e($fake_rank),$fake_rate, "Edit Rank"]);
     }
 }

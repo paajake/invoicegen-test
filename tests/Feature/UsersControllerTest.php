@@ -50,7 +50,7 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * @test
+     *
      */
     public function user_can_add_user()
     {
@@ -108,7 +108,7 @@ class UsersControllerTest extends TestCase
 
     /**
      * Test for Updating User
-     * @test
+     *
      */
     public function user_can_update_account()
     {
