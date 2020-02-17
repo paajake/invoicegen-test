@@ -57,7 +57,7 @@ class UsersControllerTest extends TestCase
         $this->withExceptionHandling();
         $user = factory("App\User")->create();
 
-        $fake_name = html_entity_decode($this->faker->name);
+        $fake_name = e($this->faker->name);
         $fake_email = $this->faker->unique()->safeEmail;
         $fake_password = $this->faker->password;
 
