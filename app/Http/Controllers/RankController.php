@@ -16,6 +16,7 @@ class RankController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return View
      */
     public function index(Request $request)
@@ -47,7 +48,7 @@ class RankController extends Controller
             {
                 return date('d/m/y H:i', strtotime($rank->updated_at) );
             })
-            ->filterColumn('created_at', function ($query, $keyword)
+            ->filterColumn('updated_at', function ($query, $keyword)
             {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);
             })
@@ -93,7 +94,7 @@ class RankController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Rank  $rank
+     * @param  Rank  $rank
      * @return View
      */
     public function edit(Rank $rank)
@@ -118,7 +119,7 @@ class RankController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Rank $rank
+     * @param Rank $rank
      * @return bool|int
      * @throws \Exception
      */

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Client;
 use App\Rank;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -70,8 +71,12 @@ class AppServiceProvider extends ServiceProvider
 
             $event->menu->add([
                 'text' => 'Clients',
-                'url'  => 'admin/settings',
+                'url'  => route("clients.index"),
                 'icon' => 'fas fa-fw fa-user-friends',
+                'label'       => Cache::remember('clients_count', config('constants.time.half_day'),
+                                                                    function (){
+                                                                        return Client::count();
+                                                                    }),
             ]);
 
             $event->menu->add(['header' => 'Account TOOLS']);
@@ -85,7 +90,7 @@ class AppServiceProvider extends ServiceProvider
                                                                     function (){
                                                                         return User::count();
                                                                     }),
-                'label_color' => 'success',
+//                'label_color' => 'success',
             ]);
 
             $event->menu->add([

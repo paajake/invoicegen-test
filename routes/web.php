@@ -15,9 +15,6 @@ Auth::routes(['register' => false]);
 
 Route::get('/', 'DashboardController@index')->name('dashboard')->middleware('auth');
 
-//Route::get('/users', "UsersController@index")->middleware('auth')->name('users.index');
-//Route::get('/users/create', "UsersController@index")->middleware('auth')->name('users.create');
-//Route::delete('/users', "UsersController@destroy")->middleware('auth')->name('users.destroy');
-
 Route::resource("ranks", "RankController")->middleware('auth');
+Route::resource("clients", "ClientController")->middleware('auth');
 Route::resource("users", "UsersController")->middleware('auth');
