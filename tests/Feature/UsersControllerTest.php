@@ -44,19 +44,20 @@ class UsersControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonCount(8, "data")
             ->assertJsonFragment([
-                "name" => $random_user->name,
+                "name" => e($random_user->name),
                 "email"=> $random_user->email,
             ]);
     }
 
     /**
-     *
+     * @test
      */
     public function user_can_add_user()
     {
+        $this->withExceptionHandling();
         $user = factory("App\User")->create();
 
-        $fake_name = $this->faker->name;
+        $fake_name = html_entity_decode($this->faker->name);
         $fake_email = $this->faker->unique()->safeEmail;
         $fake_password = $this->faker->password;
 
@@ -68,7 +69,7 @@ class UsersControllerTest extends TestCase
                     "password" => $fake_password,
                     "password_confirmation" => $fake_password,
                 ])
-            ->assertRedirect("users");
+            ->assertRedirect("/users");
 
         $response = $this->actingAs($user)->ajaxGet("/users");
 
@@ -105,10 +106,11 @@ class UsersControllerTest extends TestCase
 
     /**
      * Test for Updating User
-     *
+     * @test
      */
     public function user_can_update_account()
     {
+        $this->withExceptionHandling();
         $user = factory("App\User")->create();
 
         $fake_name = $this->faker->name;
@@ -126,7 +128,7 @@ class UsersControllerTest extends TestCase
             ])
             ->assertRedirect("users/$user->id/edit");
 
-        $response = $this->get("users/$user->id/edit");
+        $response = $this->actingAs($user)->get("users/$user->id/edit");
 
         $response->assertSeeInOrder([$fake_name,$fake_email, "Edit Account"]);
     }
