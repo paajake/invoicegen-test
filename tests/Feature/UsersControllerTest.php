@@ -50,14 +50,14 @@ class UsersControllerTest extends TestCase
     }
 
     /**
-     * @test
+     *
      */
     public function user_can_add_user()
     {
         $this->withExceptionHandling();
         $user = factory("App\User")->create();
 
-        $fake_name = e($this->faker->name);
+        $fake_name = $this->faker->name;
         $fake_email = $this->faker->unique()->safeEmail;
         $fake_password = $this->faker->password;
 
@@ -106,7 +106,7 @@ class UsersControllerTest extends TestCase
 
     /**
      * Test for Updating User
-     * @test
+     *
      */
     public function user_can_update_account()
     {

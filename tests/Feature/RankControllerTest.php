@@ -61,7 +61,7 @@ class RankControllerTest extends TestCase
             ->post("/ranks",
                 [
                     "name" => $fake_rank,
-                    "rate" => $fake_rate,
+                    "rate" => number_format($fake_rate,2),
                 ])
             ->assertRedirect("ranks");
 
