@@ -60,7 +60,11 @@ class LawyerController extends Controller
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);
             })
             ->editColumn('name', function ($lawyer) {
-                return $lawyer->name.' '.  Title::find($lawyer->title_id) ?? "" ;
+                if(isset($lawyer->title_id))
+                {
+                    return $lawyer->name.' '.  Title::find($lawyer->title_id)->title;
+                }
+                return $lawyer->name;
 
             })
             ->filterColumn('name', function ($query, $keyword) {
@@ -102,8 +106,17 @@ class LawyerController extends Controller
      */
     public function store(StoreLawyer $request)
     {
-        return $request->validated();
-        Lawyer::create($request->validated());
+        $lawyer_attributes = $request->validated();
+        unset($lawyer_attributes['image']);
+        $lawyer_attributes["image"] = "default.png";
+        $lawyer_attributes["title_id"] = $request->get("title_id");
+
+        if ($request->hasFile('image')) {
+            $lawyer_attributes["image"] =  time().'.'.$request->file('image')->clientExtension();
+            $request->file('image')->storeAs('public/images/uploads', $lawyer_attributes["image"], ["visibility" => "public"]);
+        }
+
+        Lawyer::create($lawyer_attributes);
 
         Cache::increment('lawyers_count');
 

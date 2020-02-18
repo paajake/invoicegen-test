@@ -41,7 +41,7 @@
         $(document).ready(function() {
             $('#title_id').select2({
                 placeholder: "Select a Title",
-                // allowClear: true
+                allowClear: true
             });
 
             $('#rank_id').select2({

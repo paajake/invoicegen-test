@@ -12,7 +12,7 @@
     </div>
 
     <div class="input-group mb-3">
-        <select class="select2-box input-group form-control" autofocus id="title_id" name="title_id">
+        <select class="select2-box form-control" autofocus id="title_id" name="title_id">
             @foreach($titles as $title)
                 <option value = "{{$title->id}}" @if ($title->id == (  $lawyer->title_id ?? old('title_id')))
                     selected="selected" @endif >{{ $title->title }}
@@ -34,7 +34,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="first_name" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}"
-               value="{{ $lawyer->first_name ?? old('firts_name') }}" placeholder="First Name" autofocus>
+               value="{{ $lawyer->first_name ?? old('first_name') }}" placeholder="First Name" autofocus>
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-user"></span>
