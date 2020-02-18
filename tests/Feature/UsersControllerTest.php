@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 class UsersControllerTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
     use WithFaker;
 
     /**
