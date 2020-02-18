@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Client;
+use App\Lawyer;
 use App\Rank;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
@@ -42,9 +43,9 @@ class AppServiceProvider extends ServiceProvider
             ]);
 
             $event->menu->add([
-                'text' => 'Invoices',
+                'text' => 'Invoicing',
                 'url'  => 'admin/settings',
-                'icon' => 'fas fa-fw fa-file-invoice',
+                'icon' => 'fas fa-fw fa-print',
             ]);
 
             $event->menu->add([
@@ -54,8 +55,12 @@ class AppServiceProvider extends ServiceProvider
                 'submenu' => [
                     [
                         'text' => 'Lawyers',
-                        'url'  => 'admin/settings',
+                        'url'  => route("lawyers.index"),
                         'icon' => 'fas fa-fw fa-gavel',
+                        'label' => Cache::remember('lawyers_count', config('constants.time.half_day'),
+                                                                        function (){
+                                                                            return Lawyer::count();
+                                                                        }),
                     ],
                     [
                         'text' => 'Ranks',
@@ -72,7 +77,7 @@ class AppServiceProvider extends ServiceProvider
             $event->menu->add([
                 'text' => 'Clients',
                 'url'  => route("clients.index"),
-                'icon' => 'fas fa-fw fa-user-friends',
+                'icon' => 'fas fa-business-time',
                 'label'       => Cache::remember('clients_count', config('constants.time.half_day'),
                                                                     function (){
                                                                         return Client::count();
@@ -85,7 +90,7 @@ class AppServiceProvider extends ServiceProvider
                 'text'        => 'Users',
                 'url'         => route('users.index'),
                 'active'      => [route('users.index'),route('users.create')],
-                'icon'        => 'fas fa-fw fa-user-friends',
+                'icon'        => 'fas fa-fw fa-lock-open',
                 'label'       => Cache::remember('users_count', config('constants.time.half_day'),
                                                                     function (){
                                                                         return User::count();

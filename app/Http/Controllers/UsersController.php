@@ -55,7 +55,7 @@ class UsersController extends Controller
             ->editColumn('updated_at', function ($user) {
                 return date('d/m/y H:i', strtotime($user->updated_at) );
             })
-            ->filterColumn('created_at', function ($query, $keyword) {
+            ->filterColumn('updated_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);
             })
             ->addColumn('action', function($row){
