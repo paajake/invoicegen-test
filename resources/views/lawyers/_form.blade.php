@@ -1,6 +1,6 @@
 {{--                    <p class="login-box-msg">{{ __('adminlte::adminlte.register_message') }}</p>--}}
 @if(isset($lawyer))
-    <form action="{{ route("lawyers.update", ["rank" => $lawyer->id]) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route("lawyers.update", ["lawyer" => $lawyer->id]) }}" method="post" enctype="multipart/form-data">
     @method("PUT")
 @else
     <form action="{{ route("lawyers.store") }}" method="post" enctype="multipart/form-data">
@@ -83,7 +83,7 @@
     </div>
 
     <div class="input-group mb-3">
-        <select id="rank_id" class="select2-box input-group form-control" autofocus name="rank_id">
+        <select id="rank_id" class="select2-box form-control" autofocus name="rank_id">
             @foreach($ranks as $rank)
                 <option value = "{{$rank->id}}" @if ($rank->id == (  $lawyer->rank_id ?? old('rank_id')))
                 selected="selected" @endif >{{ $rank->name }}
@@ -120,7 +120,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-               value="{{ $client->email ?? old('email') }}" placeholder="Email">
+               value="{{ $lawyer->email ?? old('email') }}" placeholder="Email">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -135,7 +135,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="phone" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-               value="{{ $client->phone ?? old('phone') }}" placeholder="Phone Number">
+               value="{{ $lawyer->phone ?? old('phone') }}" placeholder="Phone Number">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-phone"></span>

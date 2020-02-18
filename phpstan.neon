@@ -10,7 +10,9 @@ parameters:
     level: 5
 
     ignoreErrors:
-#        - '#Unsafe usage of new static#'
+        - '#Unsafe usage of new static#'
+#        - '#Access to an undefined property object::\$#'
+        - '#Access to an undefined property object::\$name#'
 
     excludes_analyse:
         - app/Listeners/AlertSuccessfulLogin.php

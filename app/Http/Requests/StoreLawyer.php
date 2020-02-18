@@ -29,8 +29,8 @@ class StoreLawyer extends FormRequest
             'image' => ['sometimes','image','mimes:jpeg,png,jpg,gif,svg','max:1024'],
             "rank_id" => "required",
             "addon_rate" => "nullable|numeric|min:0",
-            "email" => "required|email|unique:lawyers,email,". ($this->get("id") ?? 0),
-            "phone" => "sometimes|regex:/^[+]?\d{10,16}$/i",
+            "email" => "required|email|unique:lawyers,email,". ( explode('/',$this->url())[4] ?? 0 ), //fetch ID of Lawyer being updated
+            "phone" => "nullable|regex:/^[+]?\d{10,16}$/i",
         ];
     }
 
@@ -38,7 +38,7 @@ class StoreLawyer extends FormRequest
     {
         return [
             'rank_id.required' => "Please select the lawyer's rank",
-            'phone.regex' => 'Enter a valid phone number eg: +2331234567890',
+            'phone.regex' => 'Enter a valid phone number eg: +233123456789',
         ];
     }
 }

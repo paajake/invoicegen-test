@@ -6,11 +6,13 @@ use App\Http\Requests\StoreLawyer;
 use App\Lawyer;
 use App\Rank;
 use App\Title;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use phpDocumentor\Reflection\Types\Mixed_;
 use Yajra\DataTables\Facades\DataTables;
 
 class LawyerController extends Controller
@@ -30,6 +32,7 @@ class LawyerController extends Controller
 
     /**
      * Returns Datatable for Users.
+     * @throws \Exception
      */
     private function lawyersDataTable()
     {
@@ -106,17 +109,7 @@ class LawyerController extends Controller
      */
     public function store(StoreLawyer $request)
     {
-        $lawyer_attributes = $request->validated();
-        unset($lawyer_attributes['image']);
-        $lawyer_attributes["image"] = "default.png";
-        $lawyer_attributes["title_id"] = $request->get("title_id");
-
-        if ($request->hasFile('image')) {
-            $lawyer_attributes["image"] =  time().'.'.$request->file('image')->clientExtension();
-            $request->file('image')->storeAs('public/images/uploads', $lawyer_attributes["image"], ["visibility" => "public"]);
-        }
-
-        Lawyer::create($lawyer_attributes);
+        Lawyer::create(Lawyer::preProcess($request));
 
         Cache::increment('lawyers_count');
 
@@ -141,13 +134,13 @@ class LawyerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Lawyer  $lawyer
-     * @return \Illuminate\Http\Response
+     * @param StoreLawyer $request
+     * @param Lawyer $lawyer
+     * @return RedirectResponse
      */
     public function update(StoreLawyer $request, Lawyer $lawyer)
     {
-        $lawyer->update($request->validated());
+        $lawyer->update(Lawyer::preProcess($request));
 
         return redirect(route('lawyers.index'))
             ->withSuccess("Lawyer Successfully Updated!");
@@ -156,13 +149,18 @@ class LawyerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Lawyer $lawyer
+     * @param Lawyer $lawyer
      * @return bool|int
      * @throws \Exception
      */
     public function destroy(Lawyer $lawyer)
     {
+        if ($lawyer->image != "default.png"){
+            Storage::delete("public/images/uploads/$lawyer->image");
+        }
+
         $lawyer->delete();
+
         return Cache::decrement('lawyers_count');
     }
 }

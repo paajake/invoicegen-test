@@ -26,7 +26,7 @@
         <div class="col-6 m-auto">
             <div class="card">
                 <div class="card-body register-card-body">
-                    @include("ranks._form")
+                    @include("lawyers._form")
                 </div>
             </div>
         </div>

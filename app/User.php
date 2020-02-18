@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Requests\StoreUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -46,5 +47,23 @@ class User extends Authenticatable
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucwords($value);
+    }
+
+    /**
+     * @param StoreUser $request
+     * @return array
+     */
+    public static function preProcess(StoreUser $request)
+    {
+        $validated_values = $request->validated();
+        unset($validated_values['image']);
+
+        if ($request->hasFile('image')) {
+            $image_name = time() . '.' . $request->file('image')->clientExtension();
+            $request->file('image')->storeAs('public/images/uploads', $image_name, ["visibility" => "public"]);
+            $validated_values['image'] = $image_name;
+        }
+
+        return $validated_values;
     }
 }

@@ -3,12 +3,13 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class UsersControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use DatabaseMigrations;
     use WithFaker;
 
     /**
@@ -54,7 +55,6 @@ class UsersControllerTest extends TestCase
      */
     public function user_can_add_user()
     {
-        $this->withExceptionHandling();
         $user = factory("App\User")->create();
 
         $fake_name = e($this->faker->name);
@@ -112,7 +112,6 @@ class UsersControllerTest extends TestCase
      */
     public function user_can_update_account()
     {
-        $this->withExceptionHandling();
         $user = factory("App\User")->create();
 
         $fake_name = e($this->faker->name);

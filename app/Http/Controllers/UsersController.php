@@ -85,18 +85,7 @@ class UsersController extends Controller
      */
     public function store(StoreUser $request)
     {
-        $validated_values = $request->validated();
-        unset($validated_values['image']);
-        $image_name = "default.png";
-
-        if ($request->hasFile('image')) {
-            $image_name =  time().'.'.$request->file('image')->clientExtension();
-            $request->file('image')->storeAs('public/images/uploads', $image_name, ["visibility" => "public"]);
-        }
-
-        $validated_values['image'] = $image_name;
-        User::create($validated_values);
-
+        User::create(User::preProcess($request));
         Cache::increment('users_count');
 
         return redirect(route('users.index'))
@@ -123,22 +112,9 @@ class UsersController extends Controller
      */
     public function update(StoreUser $request, User $user)
     {
-        $image_name = $user->image;
+        $user->update(User::preProcess($request));
 
-        if ($request->hasFile('image')) {
-            $image_name =  time().'.'.$request->file('image')->clientExtension();
-            $request->file('image')->storeAs('public/images/uploads', $image_name, ["visibility" => "public"]);
-        }
-
-        $user->password = $request->validated()["password"];
-        $user->name = $request->validated()["name"];
-        $user->email = $request->validated()["email"];
-        $user->image = $image_name;
-
-        $user->save();
-
-
-        return redirect(route('users.edit', ["user" => $user]))
+        return redirect(route('users.edit', ["user" => $user->id]))
             ->withSuccess("Account Successfully Updated!");
 
     }

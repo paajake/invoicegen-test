@@ -20,7 +20,7 @@
                     <!-- /.card-tools -->
                 </div>
                 <div class="card-body">
-                    <p class="mb-0">Manage Lawyer.
+                    <p class="mb-0">Manage Lawyers.
                         <a href="{{route('lawyers.create')}}" class="btn btn-success float-right" data-toggle="tooltip" title="Add New Lawyer"><i class="fas fa-plus-circle"></i> <span class="d-none d-md-inline">Add</span></a></p>
                 </div>
             </div>
