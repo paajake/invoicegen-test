@@ -46,8 +46,8 @@
     </div>
 
     <div class="input-group mb-3">
-        <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" value="{{ $user->email ?? old('email') }}"
-               placeholder="{{ __('adminlte::adminlte.email') }}">
+        <input type="email" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+               value="{{  old('email') ?? $user->email ?? null }}" placeholder="{{ __('adminlte::adminlte.email') }}">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-envelope"></span>

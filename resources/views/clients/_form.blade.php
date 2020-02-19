@@ -10,7 +10,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-               value="{{ $client->name ?? old('name') }}" placeholder="Name of Rank" autofocus>
+               value="{{ old('name') ?? $client->name ?? null }}" placeholder="Name of Rank" autofocus>
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-university"></span>
@@ -26,7 +26,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-               value="{{ $client->email ?? old('email') }}" placeholder="Email">
+               value="{{old('email') ??  $client->email ?? null }}" placeholder="Email">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -41,7 +41,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="phone" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-               value="{{ $client->phone ?? old('phone') }}" placeholder="Phone Number">
+               value="{{ old('phone') ?? $client->phone ?? null }}" placeholder="Phone Number">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-phone"></span>

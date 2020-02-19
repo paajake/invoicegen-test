@@ -10,7 +10,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-               value="{{ $rank->name ?? old('name') }}" placeholder="Name of Rank" autofocus>
+               value="{{  old('name') ?? $rank->name ?? null}}" placeholder="Name of Rank" autofocus>
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-university"></span>
@@ -26,7 +26,7 @@
 
     <div class="input-group mb-3">
         <input type="number" name="rate" step="0.01" class="form-control {{ $errors->has('rate') ? 'is-invalid' : '' }}"
-               value="{{ $rank->rate ?? old('rate') }}" placeholder="Rate Per Hour for this Rank">
+               value="{{  old('rate')  ?? $rank->rate ?? null }}" placeholder="Rate Per Hour for this Rank">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-money-bill-alt"></span>
