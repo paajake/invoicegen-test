@@ -59,7 +59,7 @@ class UsersControllerTest extends TestCase
 
         $fake_name = e($this->faker->name);
         $fake_email = e($this->faker->unique()->safeEmail);
-        $fake_password = e($this->faker->password);
+        $fake_password = e($this->faker->password(8));
 
         $this->actingAs($user)
             ->post("/users",
@@ -112,11 +112,12 @@ class UsersControllerTest extends TestCase
      */
     public function user_can_update_account()
     {
+        $this->withoutExceptionHandling();
         $user = factory("App\User")->create();
 
         $fake_name = e($this->faker->name);
         $fake_email = e($this->faker->unique()->safeEmail);
-        $fake_password = e($this->faker->password);
+        $fake_password = e($this->faker->password(8));
 
         $this->actingAs($user)->post("/users/$user->id",
             [
