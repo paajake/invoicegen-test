@@ -36,7 +36,8 @@ class LawyerControllerTest extends TestCase
                 "Phone",
                 "Addon",
                 "Update",
-                "Action"]);
+                "Action",
+            ]);
 
     }
 
@@ -61,8 +62,8 @@ class LawyerControllerTest extends TestCase
             ->assertJsonFragment([
                 "name" => $lawyer_name,
                 "rank"=> e($lawyer_rank),
-                "email"=> e($random_lawyer->email),
-                "phone"=> e($random_lawyer->phone),
+                "email"=> "<a href='mailto:$random_lawyer->email'>$random_lawyer->email</a>",
+                "phone"=> "<a href='tel:$random_lawyer->phone'>$random_lawyer->phone</a>",
                 "addon_rate"=> number_format($random_lawyer->addon_rate, 2, '.', ""),
             ]);
     }
@@ -107,8 +108,8 @@ class LawyerControllerTest extends TestCase
             ->assertJsonFragment([
                 "name" => $fake_name,
                 "rank" => $random_rank->name,
-                "phone" => $fake_phone,
-                "email" => $fake_email,
+                "email"=> "<a href='mailto:$fake_email'>$fake_email</a>",
+                "phone"=> "<a href='tel:$fake_phone'>$fake_phone</a>",
                 "addon_rate" => number_format($fake_addon_rate, 2, '.', ""),
             ]);
     }
@@ -137,8 +138,8 @@ class LawyerControllerTest extends TestCase
             ->assertJsonMissingExact([
                 "name" => $random_lawyer_name,
                 "rank" => $random_lawyer_rank,
-                "phone" => $random_lawyer->phone,
-                "email" => $random_lawyer->email,
+                "email"=> "<a href='mailto:$random_lawyer->email'>$random_lawyer->email</a>",
+                "phone"=> "<a href='tel:$random_lawyer->phone'>$random_lawyer->phone</a>",
                 "addon_rate" => number_format($random_lawyer->addon_rate, 2, '.', ""),
             ]);
     }

@@ -68,7 +68,7 @@
                     {data: 'rownum', name: 'rownum', searchable: false},
                     {data: 'name', name: 'name'},
                     {data: 'image', name: 'image', orderable: false, searchable: false},
-                    {data: 'rank', name: 'rank', orderable: false, searchable: false},
+                    {data: 'rank', name: 'rank'},
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},
                     {data: 'addon_rate', name: 'addon_rate'},

@@ -44,8 +44,8 @@ class ClientControllerTest extends TestCase
             ->assertJsonCount(8, "data")
             ->assertJsonFragment([
                 "name" => e($random_client->name),
-                "email"=> $random_client->email,
-                "phone"=> $random_client->phone,
+                "email"=> "<a href='mailto:$random_client->email'>$random_client->email</a>",
+                "phone"=> "<a href='tel:$random_client->phone'>$random_client->phone</a>",
             ]);
     }
 
@@ -75,8 +75,8 @@ class ClientControllerTest extends TestCase
             ->assertJsonCount(1, "data")
             ->assertJsonFragment([
                 "name" => e($fake_name),
-                "email" => $fake_email,
-                "phone" => $fake_phone,
+                "email"=> "<a href='mailto:$fake_email'>$fake_email</a>",
+                "phone"=> "<a href='tel:$fake_phone'>$fake_phone</a>",
             ]);
     }
 
@@ -97,8 +97,8 @@ class ClientControllerTest extends TestCase
             ->assertJsonCount(2, "data")
             ->assertJsonMissing([
                 "name" => e($random_client->name),
-                "email" => $random_client->email,
-                "phone" => $random_client->phone,
+                "email"=> "<a href='mailto:$random_client->email'>$random_client->email</a>",
+                "phone"=> "<a href='tel:$random_client->phone'>$random_client->phone</a>",
             ]);
     }
 

@@ -38,18 +38,20 @@ class LawyerController extends Controller
     {
         DB::statement(DB::raw('set @rownum=0'));
 
-        $data = Lawyer::select([
-            DB::raw('@rownum  := @rownum  + 1 AS rownum'),
-            'id',
-            DB::raw("CONCAT(lawyers.first_name,' ',lawyers.last_name) as name"),
-            'title_id',
-            'image',
-            'rank_id',
-            'email',
-            'phone',
-            'addon_rate',
-            'updated_at'
-        ]);
+        $data = Lawyer::join('titles', 'lawyers.title_id', '=', 'titles.id')
+                        ->join('ranks', 'lawyers.rank_id', '=', 'ranks.id')
+                        ->select([
+                            DB::raw('@rownum  := @rownum  + 1 AS rownum'),
+                            'lawyers.id',
+                            DB::raw("CONCAT(lawyers.first_name,' ',lawyers.last_name,' ',titles.title ) as name"),
+                            'title_id',
+                            'image',
+                            'ranks.name as rank',
+                            'email',
+                            'phone',
+                            'addon_rate',
+                            'lawyers.updated_at'
+                        ]);
 
         return Datatables::of($data)
             ->editColumn('image', function ($lawyer) {
@@ -59,22 +61,20 @@ class LawyerController extends Controller
             ->editColumn('updated_at', function ($lawyer) {
                 return date('d/m/y H:i', strtotime($lawyer->updated_at) );
             })
-            ->filterColumn('updated_at', function ($query, $keyword) {
-                $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);
+            ->editColumn('email', function ($lawyer) {
+                return "<a href='mailto:$lawyer->email'>$lawyer->email</a>";
             })
-            ->editColumn('name', function ($lawyer) {
-                if(isset($lawyer->title_id))
-                {
-                    return $lawyer->name.' '.  Title::find($lawyer->title_id)->title;
-                }
-                return $lawyer->name;
-
+            ->editColumn('phone', function ($lawyer) {
+                return "<a href='tel:$lawyer->phone'>$lawyer->phone</a>";
+            })
+            ->filterColumn('updated_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(lawyers.updated_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('rank', function ($query, $keyword) {
+                $query->whereRaw("ranks.name like ?", ["%$keyword%"]);
             })
             ->filterColumn('name', function ($query, $keyword) {
-                $query->whereRaw("CONCAT(first_name,' ',last_name ) like ?", ["%$keyword%"]);
-            })
-            ->addColumn('rank', function($row){
-                return  Rank::find($row->rank_id)->name;
+                $query->whereRaw("CONCAT(first_name,' ',last_name,' ', titles.title) like ?", ["%$keyword%"]);
             })
             ->addColumn('action', function($row){
                 return "<a href='".route("lawyers.edit",["lawyer" => $row->id])."'
@@ -85,7 +85,7 @@ class LawyerController extends Controller
                         class='btn btn-danger btn-sm' data-toggle='tooltip' title='Delete User'>
                         <i class='fas fa-trash'></i> <span class='d-none d-md-inline'>Delete</span></button>";
             })
-            ->rawColumns(['image','action'])
+            ->rawColumns(["image","action","email","phone"])
             ->make(true);
     }
 

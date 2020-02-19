@@ -47,6 +47,12 @@ class ClientController extends Controller
             {
                 return date('d/m/y H:i', strtotime($client->updated_at) );
             })
+            ->editColumn('email', function ($client) {
+                return "<a href='mailto:$client->email'>$client->email</a>";
+            })
+            ->editColumn('phone', function ($client) {
+                return "<a href='tel:$client->phone'>$client->phone</a>";
+            })
             ->filterColumn('updated_at', function ($query, $keyword)
             {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%y %H:%i') like ?", ["%$keyword%"]);
@@ -61,7 +67,7 @@ class ClientController extends Controller
                         class='btn btn-danger btn-sm' data-toggle='tooltip' title='Delete Client'>
                         <i class='fas fa-trash'></i> <span class='d-none d-md-inline'>Delete</span></button>";
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['action', "email", "phone"])
             ->make(true);
     }
 
