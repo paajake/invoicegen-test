@@ -51,6 +51,25 @@ class ClientControllerTest extends TestCase
 
     /**
      * @test
+     * @return void
+     */
+    public function user_can_view_clients_create_page()
+    {
+        $user = factory("App\User")->create();
+
+        $response = $this->actingAs($user)->get('/clients/create');
+
+        $response->assertStatus(200)
+            ->assertViewIs("clients.create")
+            ->assertSeeTextInOrder([
+                "Clients",
+                "Add New Client",
+                "Add Client",
+            ]);
+    }
+
+    /**
+     * @test
      */
     public function user_can_add_client(){
         $user = factory("App\User")->create();

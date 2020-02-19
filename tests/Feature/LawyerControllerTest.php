@@ -70,6 +70,27 @@ class LawyerControllerTest extends TestCase
 
     /**
      * @test
+     * @return void
+     */
+    public function user_can_view_lawyers_create_page()
+    {
+        $user = factory("App\User")->create();
+
+        $response = $this->actingAs($user)->get('/lawyers/create');
+
+        $response->assertStatus(200)
+            ->assertViewIs("lawyers.create")
+            ->assertViewHas(["titles", "ranks"])
+            ->assertSeeTextInOrder([
+                "Lawyers",
+                "Add New Lawyer",
+                "Browse",
+                "Add Lawyer",
+            ]);
+    }
+
+    /**
+     * @test
      */
     public function user_can_add_lawyer(){
         $ranks = factory("App\Rank", 6)->create();
@@ -175,7 +196,6 @@ class LawyerControllerTest extends TestCase
             ])
             ->assertRedirect("lawyers/")
             ->assertSessionHas("success","Lawyer Successfully Updated!");
-        ;
 
         $response = $this->actingAs($user)->get("lawyers/$random_lawyer->id/edit");
 

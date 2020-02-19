@@ -10,7 +10,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-               value="{{ old('name') ?? $client->name ?? null }}" placeholder="Name of Rank" autofocus>
+               value="{{ old('name') ?? $client->name ?? null }}" placeholder="Name of Client" autofocus>
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-university"></span>

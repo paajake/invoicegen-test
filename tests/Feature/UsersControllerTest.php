@@ -51,6 +51,26 @@ class UsersControllerTest extends TestCase
 
     /**
      * @test
+     * @return void
+     */
+    public function user_can_view_user_create_page()
+    {
+        $user = factory("App\User")->create();
+
+        $response = $this->actingAs($user)->get('/users/create');
+
+        $response->assertStatus(200)
+            ->assertViewIs("users.create")
+            ->assertSeeTextInOrder([
+                "Users",
+                "Add New User",
+                "Browse",
+                "Add User",
+            ]);
+    }
+
+    /**
+     * @test
      */
     public function user_can_add_user()
     {

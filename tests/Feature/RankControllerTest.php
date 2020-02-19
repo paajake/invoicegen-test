@@ -50,6 +50,25 @@ class RankControllerTest extends TestCase
 
     /**
      * @test
+     * @return void
+     */
+    public function user_can_view_ranks_create_page()
+    {
+        $user = factory("App\User")->create();
+
+        $response = $this->actingAs($user)->get('/ranks/create');
+
+        $response->assertStatus(200)
+            ->assertViewIs("ranks.create")
+            ->assertSeeTextInOrder([
+                "Ranks",
+                "Add New Rank",
+                "Add Rank",
+            ]);
+    }
+
+    /**
+     * @test
      */
     public function user_can_add_rank(){
         $user = factory("App\User")->create();
