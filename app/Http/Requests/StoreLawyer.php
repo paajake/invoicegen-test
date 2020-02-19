@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreLawyer extends FormRequest
 {
@@ -14,6 +15,19 @@ class StoreLawyer extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+
+        $this->merge([
+            'id' => explode('/',$this->url())[4] ?? 0, //get ID of lawyer being updated
+        ]);
     }
 
     /**
@@ -29,7 +43,7 @@ class StoreLawyer extends FormRequest
             'image' => ['sometimes','image','mimes:jpeg,png,jpg,gif,svg','max:1024'],
             "rank_id" => "required",
             "addon_rate" => "nullable|numeric|min:0",
-            "email" => "required|email|unique:lawyers,email,". ( explode('/',$this->url())[4] ?? 0 ), //fetch ID of Lawyer being updated
+            "email" => "required|email|unique:lawyers,email,".$this->id,
             "phone" => "nullable|regex:/^[+]?\d{10,16}$/i",
         ];
     }

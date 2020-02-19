@@ -49,7 +49,7 @@
             });
         });
 
-
+        //Image Handling
         $(document).on("click", ".browse", function() {
             let file = $(this).parents().find(".file");
             file.trigger("click");

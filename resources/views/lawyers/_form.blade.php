@@ -12,9 +12,9 @@
     </div>
 
     <div class="input-group mb-3">
-        <select class="select2-box form-control" autofocus id="title_id" name="title_id">
+        <select class="form-control select2" style="width: 100%;" autofocus id="title_id" name="title_id">
             @foreach($titles as $title)
-                <option value = "{{$title->id}}" @if ($title->id == (  $lawyer->title_id ?? old('title_id')))
+                <option value = "{{$title->id}}" @if ($title->id == ( old('title_id') ?? $lawyer->title_id ?? null ))
                     selected="selected" @endif >{{ $title->title }}
                 </option>
             @endforeach
@@ -34,7 +34,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="first_name" class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}"
-               value="{{ $lawyer->first_name ?? old('first_name') }}" placeholder="First Name" autofocus>
+               value="{{ old('first_name') ?? $lawyer->first_name ?? null}}" placeholder="First Name" autofocus>
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -50,7 +50,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="last_name" class="form-control {{ $errors->has('last_name') ? 'is-invalid' : '' }}"
-               value="{{ $lawyer->last_name ?? old('last_name') }}" placeholder="Last Name" autofocus>
+               value="{{ old('last_name') ?? $lawyer->last_name ?? null }}" placeholder="Last Name" autofocus>
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -83,9 +83,9 @@
     </div>
 
     <div class="input-group mb-3">
-        <select id="rank_id" class="select2-box form-control" autofocus name="rank_id">
+        <select id="rank_id" class="form-control select2" style="width: 100%;" autofocus name="rank_id">
             @foreach($ranks as $rank)
-                <option value = "{{$rank->id}}" @if ($rank->id == (  $lawyer->rank_id ?? old('rank_id')))
+                <option value = "{{$rank->id}}" @if ($rank->id == (  old('rank_id') ?? $lawyer->rank_id ?? null ))
                 selected="selected" @endif >{{ $rank->name }}
                 </option>
             @endforeach
@@ -105,7 +105,7 @@
 
     <div class="input-group mb-3">
         <input type="number" name="addon_rate" step="0.01" class="form-control {{ $errors->has('addon_rate') ? 'is-invalid' : '' }}"
-               value="{{ $lawyer->addon_rate ?? old('addon_rate') }}" placeholder="Addon Percentage">
+               value="{{ old('addon_rate') ?? $lawyer->addon_rate ?? null }}" placeholder="Addon Percentage">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-money-bill-alt"></span>
@@ -120,7 +120,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-               value="{{ $lawyer->email ?? old('email') }}" placeholder="Email">
+               value="{{ old('email') ?? $lawyer->email ?? null }}" placeholder="Email">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -135,7 +135,7 @@
 
     <div class="input-group mb-3">
         <input type="text" name="phone" class="form-control {{ $errors->has('phone') ? 'is-invalid' : '' }}"
-               value="{{ $lawyer->phone ?? old('phone') }}" placeholder="Phone Number">
+               value="{{ old('phone') ?? $lawyer->phone ?? null }}" placeholder="Phone Number">
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fas fa-phone"></span>
