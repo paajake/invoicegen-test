@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
-use phpDocumentor\Reflection\Types\Mixed_;
 use Yajra\DataTables\Facades\DataTables;
 
 class LawyerController extends Controller
@@ -21,6 +20,7 @@ class LawyerController extends Controller
      * Display a listing of the resource.
      * @param Request $request
      * @return View
+     * @throws \Exception
      */
     public function index(Request $request)
     {
