@@ -169,9 +169,9 @@ class LawyerControllerTest extends TestCase
                 "phone" => $random_lawyer->phone,
                 "email" => $random_lawyer->email,
                 "addon_rate" => $random_lawyer->addon_rate,
-//                'image' => UploadedFile::fake()->image("image.png"),
+                "image" => UploadedFile::fake()->image("image.png"),
             ])
-            ->assertRedirect("/lawyers")
+            ->assertRedirect("lawyers/")
             ->assertSessionHas("success","Lawyer Successfully Updated!");
 
         $image_name = Lawyer::find($random_lawyer->id)->image;
@@ -192,7 +192,7 @@ class LawyerControllerTest extends TestCase
                 "addon_rate" => number_format($random_lawyer->addon_rate, 2, '.', ""),
             ]);
 
-//        Storage::assertMissing("public/images/uploads/$image_name");
+        Storage::assertMissing("public/images/uploads/$image_name");
     }
 
     /**
