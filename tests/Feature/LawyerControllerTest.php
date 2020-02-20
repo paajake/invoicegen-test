@@ -148,13 +148,12 @@ class LawyerControllerTest extends TestCase
      * @test
      */
     public function user_can_delete_lawyer(){
-        $this->withoutExceptionHandling();
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 6)->create();
 
         $random_lawyer = factory("App\Lawyer", 3)->create()->random();
-        $random_lawyer_name = e($random_lawyer->first_name. ' '.$random_lawyer->last_name. ' '. $titles->find($random_lawyer->title_id)->title);
-        $random_lawyer_rank = e($ranks->find($random_lawyer->rank_id)->name);
+        $random_lawyer_name = $random_lawyer->first_name. ' '.$random_lawyer->last_name. ' '. $titles->find($random_lawyer->title_id)->title;
+        $random_lawyer_rank = $ranks->find($random_lawyer->rank_id)->name;
 
         $user = factory("App\User")->create();
 
@@ -206,9 +205,9 @@ class LawyerControllerTest extends TestCase
         $random_lawyer = factory("App\Lawyer", 5)->create()->random();
 
         $fake_addon_rate = $this->faker->randomFloat(2, 0, 10);
-        $fake_first_name = e($this->faker->firstName);
-        $fake_last_name = e($this->faker->lastName);
-        $fake_email = e($this->faker->companyEmail);
+        $fake_first_name = $this->faker->firstName;
+        $fake_last_name = $this->faker->lastName;
+        $fake_email = $this->faker->companyEmail;
         $fake_phone = $this->faker->e164PhoneNumber;
 
         $user = factory("App\User")->create();
@@ -232,8 +231,8 @@ class LawyerControllerTest extends TestCase
 
         $response->assertSeeInOrder([
             e($random_title->title),
-            $fake_first_name,
-            $fake_last_name,
+            e($fake_first_name),
+            e($fake_last_name),
             e($random_rank->name),
             $fake_addon_rate,
             $fake_email,

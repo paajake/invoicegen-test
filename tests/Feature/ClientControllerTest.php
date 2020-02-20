@@ -79,9 +79,9 @@ class ClientControllerTest extends TestCase
         $fake_email = $this->faker->unique()->safeEmail;
 
         $this->actingAs($user)
-            ->post("/clients",
+            ->postJson("/clients",
                 [
-                    "name" => e($fake_name),
+                    "name" => $fake_name,
                     "email" => $fake_email,
                     "phone" => $fake_phone,
                 ])

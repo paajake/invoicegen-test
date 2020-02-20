@@ -109,7 +109,6 @@ class UsersControllerTest extends TestCase
         $image_name = User::find($fake_user_id)->image;
 
         Storage::assertExists("public/images/uploads/$image_name");
-
     }
 
     /**
