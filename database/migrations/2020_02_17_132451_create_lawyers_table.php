@@ -30,7 +30,7 @@ class CreateLawyersTable extends Migration
             $table->foreign('title_id')
                 ->references('id')
                 ->on('titles')
-                ->onDelete('cascade');
+                ->onDelete("SET null");
 
             $table->foreign('rank_id')
                 ->references('id')

@@ -11,6 +11,6 @@ class LawyerSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Lawyer::class, 15)->create();
+        factory(App\Lawyer::class, 11)->create();
     }
 }

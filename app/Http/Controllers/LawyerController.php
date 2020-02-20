@@ -38,12 +38,12 @@ class LawyerController extends Controller
     {
         DB::statement(DB::raw('set @rownum=0'));
 
-        $data = Lawyer::join('titles', 'lawyers.title_id', '=', 'titles.id')
+        $data = Lawyer::leftJoin('titles', 'lawyers.title_id', '=', 'titles.id')
                         ->join('ranks', 'lawyers.rank_id', '=', 'ranks.id')
                         ->select([
                             DB::raw('@rownum  := @rownum  + 1 AS rownum'),
                             'lawyers.id',
-                            DB::raw("CONCAT(lawyers.first_name,' ',lawyers.last_name,' ',titles.title ) as name"),
+                            DB::raw("CONCAT_WS(' ',lawyers.first_name,lawyers.last_name,titles.title ) as name"),
                             'title_id',
                             'image',
                             'ranks.name as rank',

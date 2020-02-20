@@ -33,7 +33,7 @@ class ClientControllerTest extends TestCase
     /**
      * @test
      */
-    public function user_can_access_ranks_data(){
+    public function user_can_access_clients_data(){
         $random_client = factory("App\Client", 8)->create()->random();
 
         $user = factory("App\User")->create();

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class TitleSeeder extends Seeder
+class TimesheetSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class TitleSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Title::class, 5)->create();
+        factory(App\Timesheet::class, 50)->create();
     }
 }

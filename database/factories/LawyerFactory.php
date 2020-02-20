@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Lawyer::class, function (Faker $faker) {
     return [
-        'title_id' => $faker->numberBetween(1,6),
+        'title_id' => $faker->numberBetween(1,5),
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
         'image' => "default.png",
