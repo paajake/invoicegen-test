@@ -24,9 +24,11 @@ class StoreLawyer extends FormRequest
      */
     protected function prepareForValidation()
     {
+        $url_arr = explode('/',$this->url());
+        $url_id = $url_arr[count($url_arr) - 1];
 
         $this->merge([
-            'id' => explode('/',$this->url())[4] ?? 0, //get ID of lawyer being updated
+            'id' =>  $url_id, //get ID of lawyer being updated
         ]);
     }
 
