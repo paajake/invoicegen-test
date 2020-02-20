@@ -148,6 +148,7 @@ class LawyerControllerTest extends TestCase
      * @test
      */
     public function user_can_delete_lawyer(){
+        $this->withoutExceptionHandling();
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 6)->create();
 
@@ -171,7 +172,7 @@ class LawyerControllerTest extends TestCase
                 "addon_rate" => $random_lawyer->addon_rate,
                 'image' => UploadedFile::fake()->image("image.png"),
             ])
-            ->assertRedirect("lawyers/")
+            ->assertRedirect("/lawyers")
             ->assertSessionHas("success","Lawyer Successfully Updated!");
 
         $image_name = Lawyer::find($random_lawyer->id)->image;
@@ -193,7 +194,6 @@ class LawyerControllerTest extends TestCase
             ]);
 
         Storage::assertMissing("public/images/uploads/$image_name");
-
     }
 
     /**
