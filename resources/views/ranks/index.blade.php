@@ -56,7 +56,7 @@
         $(function () {
 
             $('#ranksDataTable').DataTable({
-                processing: true,
+                processing: false,
                 serverSide: true,
                 stateSave: true,
                 ajax: "{{ route('ranks.index') }}",

@@ -148,7 +148,6 @@ class LawyerControllerTest extends TestCase
      * @test
      */
     public function user_can_delete_lawyer(){
-        $this->withoutExceptionHandling();
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 6)->create();
 

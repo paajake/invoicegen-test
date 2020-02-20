@@ -60,7 +60,7 @@
         $(function () {
 
             $('#lawyersDataTable').DataTable({
-                processing: true,
+                processing: false,
                 serverSide: true,
                 stateSave: true,
                 ajax: "{{ route('lawyers.index') }}",

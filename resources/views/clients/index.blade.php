@@ -57,7 +57,7 @@
         $(function () {
 
             $('#clientsDataTable').DataTable({
-                processing: true,
+                processing: false,
                 serverSide: true,
                 stateSave: true,
                 ajax: "{{ route('clients.index') }}",

@@ -270,12 +270,12 @@ return [
         ],
         [
             'name' => 'Pace',
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-circle.min.css',
                 ],
                 [
                     'type' => 'js',
