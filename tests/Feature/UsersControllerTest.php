@@ -2,8 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UsersControllerTest extends TestCase
@@ -45,7 +48,7 @@ class UsersControllerTest extends TestCase
             ->assertJsonCount(8, "data")
             ->assertJsonFragment([
                 "name" => e($random_user->name),
-                "email"=> $random_user->email,
+                "email" => $random_user->email,
             ]);
     }
 
@@ -81,10 +84,11 @@ class UsersControllerTest extends TestCase
         $fake_password = e($this->faker->password(8));
 
         $this->actingAs($user)
-            ->post("/users",
+            ->postJson("/users",
                 [
                     "name" => $fake_name,
                     "email" => $fake_email,
+                    'image' => UploadedFile::fake()->image("image.png"),
                     "password" => $fake_password,
                     "password_confirmation" => $fake_password,
                 ])
@@ -100,6 +104,12 @@ class UsersControllerTest extends TestCase
                 "name" => e($fake_name),
                 "email"=> e($fake_email),
             ]);
+
+        $fake_user_id = $response->decodeResponseJson("data")[0]["id"];
+        $image_name = User::find($fake_user_id)->image;
+
+        Storage::assertExists("public/images/uploads/$image_name");
+
     }
 
     /**
@@ -131,7 +141,6 @@ class UsersControllerTest extends TestCase
      */
     public function user_can_update_account()
     {
-        $this->withoutExceptionHandling();
         $user = factory("App\User")->create();
 
         $fake_name = e($this->faker->name);

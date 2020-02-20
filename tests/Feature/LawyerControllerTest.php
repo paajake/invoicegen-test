@@ -2,9 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Lawyer;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class LawyerControllerTest extends TestCase
@@ -118,6 +121,7 @@ class LawyerControllerTest extends TestCase
                     "phone" => $fake_phone,
                     "email" => $fake_email,
                     "addon_rate" => $fake_addon_rate,
+                    'image' => UploadedFile::fake()->image("image.png"),
                 ])
             ->assertRedirect("lawyers")
             ->assertSessionHas("success","Lawyer Successfully Added!");
@@ -133,6 +137,11 @@ class LawyerControllerTest extends TestCase
                 "phone"=> "<a href='tel:$fake_phone'>$fake_phone</a>",
                 "addon_rate" => number_format($fake_addon_rate, 2, '.', ""),
             ]);
+
+        $fake_lawyer_id = $response->decodeResponseJson("data")[0]["id"];
+        $image_name = Lawyer::find($fake_lawyer_id)->image;
+
+        Storage::assertExists("public/images/uploads/$image_name");
     }
 
     /**
@@ -148,8 +157,27 @@ class LawyerControllerTest extends TestCase
 
         $user = factory("App\User")->create();
 
+        //Update Lawyer with Image
+        $this->actingAs($user)->postJson("/lawyers/$random_lawyer->id",
+            [
+                "id" => $random_lawyer->id,
+                "_method" => 'PUT',
+                "rank_id" => $random_lawyer->rank_id,
+                "title_id" => $random_lawyer->title_id,
+                "first_name" => $random_lawyer->first_name,
+                "last_name" => $random_lawyer->last_name,
+                "phone" => $random_lawyer->phone,
+                "email" => $random_lawyer->email,
+                "addon_rate" => $random_lawyer->addon_rate,
+                'image' => UploadedFile::fake()->image("image.png"),
+            ])
+            ->assertRedirect("lawyers/")
+            ->assertSessionHas("success","Lawyer Successfully Updated!");
+
+        $image_name = Lawyer::find($random_lawyer->id)->image;
+
         $this->actingAs($user)
-            ->post("/lawyers/$random_lawyer->id", ["id" => $random_lawyer->id, "_method" => 'DELETE'] )
+            ->postJson("/lawyers/$random_lawyer->id", ["id" => $random_lawyer->id, "_method" => 'DELETE'] )
             ->assertStatus(200);
 
         $response = $this->actingAs($user)->ajaxGet("/lawyers");
@@ -163,6 +191,9 @@ class LawyerControllerTest extends TestCase
                 "phone"=> "<a href='tel:$random_lawyer->phone'>$random_lawyer->phone</a>",
                 "addon_rate" => number_format($random_lawyer->addon_rate, 2, '.', ""),
             ]);
+
+        Storage::assertMissing("public/images/uploads/$image_name");
+
     }
 
     /**
@@ -182,7 +213,7 @@ class LawyerControllerTest extends TestCase
 
         $user = factory("App\User")->create();
 
-        $this->actingAs($user)->post("/lawyers/$random_lawyer->id",
+        $this->actingAs($user)->postJson("/lawyers/$random_lawyer->id",
             [
                 "id" => $random_lawyer->id,
                 "_method" => 'PUT',
