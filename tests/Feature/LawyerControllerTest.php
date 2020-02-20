@@ -157,22 +157,22 @@ class LawyerControllerTest extends TestCase
 
         $user = factory("App\User")->create();
 
-        //Update Lawyer with Image
-//        $this->actingAs($user)->postJson("/lawyers/$random_lawyer->id",
-//            [
-//                "id" => $random_lawyer->id,
-//                "_method" => 'PUT',
-//                "rank_id" => $random_lawyer->rank_id,
-//                "title_id" => $random_lawyer->title_id,
-//                "first_name" => $random_lawyer->first_name,
-//                "last_name" => $random_lawyer->last_name,
-//                "phone" => $random_lawyer->phone,
-//                "email" => $random_lawyer->email,
-//                "addon_rate" => $random_lawyer->addon_rate,
+//        Update Lawyer with Image
+        $this->actingAs($user)->postJson("/lawyers/$random_lawyer->id",
+            [
+                "id" => $random_lawyer->id,
+                "_method" => 'PUT',
+                "rank_id" => $random_lawyer->rank_id,
+                "title_id" => $random_lawyer->title_id,
+                "first_name" => $random_lawyer->first_name,
+                "last_name" => $random_lawyer->last_name,
+                "phone" => $random_lawyer->phone,
+                "email" => $random_lawyer->email,
+                "addon_rate" => $random_lawyer->addon_rate,
 //                'image' => UploadedFile::fake()->image("image.png"),
-//            ])
-//            ->assertRedirect("/lawyers")
-//            ->assertSessionHas("success","Lawyer Successfully Updated!");
+            ])
+            ->assertRedirect("/lawyers")
+            ->assertSessionHas("success","Lawyer Successfully Updated!");
 
         $image_name = Lawyer::find($random_lawyer->id)->image;
 
