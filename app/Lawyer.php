@@ -9,15 +9,15 @@ class Lawyer extends Model
 {
     protected $guarded = ["id"];
 
-    public function title()
-    {
-        return $this->belongsTo(Title::class);
-    }
-
-    public function rank()
-    {
-        return $this->belongsTo(Rank::class);
-    }
+//    public function title()
+//    {
+//        return $this->belongsTo(Title::class);
+//    }
+//
+//    public function rank()
+//    {
+//        return $this->belongsTo(Rank::class);
+//    }
 
     /**
      * Returns an Array of Validated Attributes
