@@ -8,8 +8,8 @@ class Rank extends Model
 {
     protected $fillable = ["name", "rate"];
 
-    public function lawyers()
-    {
-        return $this->hasMany(Lawyer::class);
-    }
+//    public function lawyers()
+//    {
+//        return $this->hasMany(Lawyer::class);
+//    }
 }
