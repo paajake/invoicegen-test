@@ -31,7 +31,7 @@ class LawyerController extends Controller
     }
 
     /**
-     * Returns Datatable for Users.
+     * Returns Datatable for Lawyers.
      * @throws \Exception
      */
     private function lawyersDataTable()

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Client;
 use App\Lawyer;
 use App\Rank;
+use App\Timesheet;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
@@ -44,9 +45,30 @@ class AppServiceProvider extends ServiceProvider
 
             $event->menu->add([
                 'text' => 'Invoicing',
-                'url'  => 'admin/settings',
                 'icon' => 'fas fa-fw fa-print',
+                'active'      => ["invoices/*", "tmesheets/*"],
+                'submenu' => [
+                    [
+                        'text' => 'TimeSheets',
+                        'url'  => route("timesheets.index"),
+                        'icon' => 'fas fa-user-clock',
+                        'label' => Cache::remember('timesheets_count', config('constants.time.half_day'),
+                            function (){
+                                return Timesheet::count();
+                            }),
+                    ],
+                    [
+                        'text' => 'Invoices',
+                        'icon' => 'fas fa-file-invoice-dollar',
+                        'url'  => route("ranks.index"),
+//                        'label' => Cache::remember('invoices_count', config('constants.time.half_day'),
+//                            function (){
+//                                return Invoice::count();
+//                            }),
+                    ],
+                ]
             ]);
+
 
             $event->menu->add([
                 'text' => 'Staff',

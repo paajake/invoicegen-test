@@ -47,7 +47,8 @@ class LawyerControllerTest extends TestCase
     /**
      * @test
      */
-    public function user_can_access_lawyers_data(){
+    public function user_can_access_lawyers_data()
+    {
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 6)->create();
 

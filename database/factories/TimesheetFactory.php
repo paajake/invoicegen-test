@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 use Illuminate\Database\Eloquent\Factory;
 
 $factory->define(Timesheet::class, function (Faker $faker) {
-    $start_time = Carbon::today()->addHours($faker->numberBetween(4, 7));
+    $start_time = Carbon::today()->addHours($faker->numberBetween(5, 8));
 
     return [
         'lawyer_id' => $faker->numberBetween(1,10),
