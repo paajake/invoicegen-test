@@ -146,9 +146,6 @@ class TimesheetControllerTest extends TestCase
         $random_client = $clients->find($random_timesheet->client_id);
         $random_lawyer = $lawyers->find($random_timesheet->lawyer_id);
         $lawyer = $random_lawyer->first_name.' '.$random_lawyer->last_name.' '. $random_lawyer->title()->first()->title;
-        $start_time = Carbon::today()->addHours($this->faker->numberBetween(6, 12));
-        $end_time = Carbon::tomorrow()->addHours(-5);
-
 
         $user = factory("App\User")->create();
 

@@ -69,7 +69,6 @@ class AppServiceProvider extends ServiceProvider
                 ]
             ]);
 
-
             $event->menu->add([
                 'text' => 'Staff',
                 'icon' => 'fas fa-fw fa-user-friends',
