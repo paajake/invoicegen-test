@@ -158,7 +158,7 @@ class LawyerControllerTest extends TestCase
 
         $user = factory("App\User")->create();
 
-//        Update Lawyer with Image
+        //Update Lawyer with Image so that Image Deleting too can be Tested
         $this->actingAs($user)->postJson("/lawyers/$random_lawyer->id",
             [
                 "id" => $random_lawyer->id,

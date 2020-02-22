@@ -119,7 +119,7 @@ class TimesheetController extends Controller
         Cache::increment('timesheets_count');
 
         return redirect(route('timesheets.index'))
-            ->withSuccess("Timesheet Successfully Added!");
+            ->withSuccess("TimeSheet Successfully Added!");
     }
 
     /**

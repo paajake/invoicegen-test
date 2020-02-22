@@ -26,7 +26,7 @@ class StoreTimesheet extends FormRequest
         return [
             "lawyer_id" => "required",
             "client_id" => "required",
-            "start_time" => "required",
+            "start_time" => "required|date",
             "end_time" => "required|date|after:start_time",
         ];
     }
