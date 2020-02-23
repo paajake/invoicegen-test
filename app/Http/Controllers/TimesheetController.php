@@ -28,6 +28,7 @@ class TimesheetController extends Controller
         }
         return view("timesheets.index");
     }
+
     /**
      * Returns Datatable for Users.
      * @throws \Exception

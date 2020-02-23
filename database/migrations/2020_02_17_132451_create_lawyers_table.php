@@ -25,8 +25,6 @@ class CreateLawyersTable extends Migration
             $table->decimal("addon_rate")->default(0);
             $table->timestamps();
 
-            $table->index(["rank_id", "title_id"]);
-
             $table->foreign('title_id')
                 ->references('id')
                 ->on('titles')

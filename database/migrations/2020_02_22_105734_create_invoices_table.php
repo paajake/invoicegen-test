@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimesheetsTable extends Migration
+class CreateInvoicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,21 @@ class CreateTimesheetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('timesheets', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('lawyer_id');
             $table->unsignedBigInteger('client_id');
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->string('invoice');
             $table->timestamps();
-
-            $table->foreign('lawyer_id')
-                ->references('id')
-                ->on('lawyers')
-                ->onDelete('cascade');
 
             $table->foreign('client_id')
                 ->references('id')
                 ->on('clients')
                 ->onDelete('cascade');
+
+            $table->unique([ "client_id", "start_date", "end_date"]);
+
         });
     }
 
@@ -40,6 +38,6 @@ class CreateTimesheetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timesheets');
+        Schema::dropIfExists('invoices');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Client;
+use App\Invoice;
 use App\Lawyer;
 use App\Rank;
 use App\Timesheet;
@@ -60,11 +61,11 @@ class AppServiceProvider extends ServiceProvider
                     [
                         'text' => 'Invoices',
                         'icon' => 'fas fa-file-invoice-dollar',
-                        'url'  => route("ranks.index"),
-//                        'label' => Cache::remember('invoices_count', config('constants.time.half_day'),
-//                            function (){
-//                                return Invoice::count();
-//                            }),
+                        'url'  => route("invoices.index"),
+                        'label' => Cache::remember('invoices_count', config('constants.time.half_day'),
+                            function (){
+                                return Invoice::count();
+                            }),
                     ],
                 ]
             ]);
