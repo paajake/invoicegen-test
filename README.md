@@ -11,15 +11,15 @@
 ## About
 This is a Test app to the Finance team of a Law Firm generate Invoices for their clients based on billable hours garnered by the Lawyers.
 
-##Installation
+## Installation
 This is a PHP based application with Laravel Framework for Backend and AdminLTE for Frontend 
 
-###Requirements
+### Requirements
 - LEMP stack with PHP 7.2 minimum
 - <a href="https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos">Composer</a> installed
 - _*Note:* CDNs are used for Frontend dependencies and thus no node or npm installations are required._
 
-###Steps
+### Steps
    1. Download or Clone the repo into your web directory and point your webserver to the `public` folder as the app's root directory
    2. Rename `.env.example` to `.env`
    3. Create a new mysql database and update `.env` with it's name and access credentials
