@@ -9,7 +9,7 @@
 </p>
 
 ## About
-This is a Test app to the Finance team of a Law Firm generate Invoices for their clients based on billable hours garnered by the Lawyers.
+This is a Test app to help the Finance department of a Law Firm, generate invoices for their clients based on billable hours garnered by their Lawyers.
 
 ## Installation
 This is a PHP based application with Laravel Framework for Backend and AdminLTE for Frontend 
@@ -29,4 +29,4 @@ This is a PHP based application with Laravel Framework for Backend and AdminLTE 
    7. From a terminal, change directory to the root folder of the project and run `composer install` to install the dependencies of the app, and run `composer artisan key:generate` when successfully completed to generate an encryption key for the app.
    8. Run `composer artisan migrate` to create the database structure of the app in mysql.
    9. Run `composer artisan db:seed` to seed the database with dummy data.
-   10. Visit the base url of the app and login with this credential `Email : admin@invoicegen.test ` `Password : admin1234`
+   10. Visit the base url of the app in a browser and login with this credential `Email : admin@invoicegen.test ` and `Password : admin1234`
