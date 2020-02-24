@@ -30,14 +30,15 @@
         <div class="col-6 m-auto">
             <div class="card">
                 <div class="card-body register-card-body">
-                    <form action="{{ route("lawyers.store") }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route("timesheets.import") }}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="input-group mb-3">
-                            <input type="text"  disabled placeholder="Upload TimeSheet" id="image-text" class="form-control {{ $errors->has('timesheet') ? 'is-invalid' : '' }}" value="{{ old('timesheet') }}" autofocus>
+                            <input type="text"  disabled placeholder="Upload TimeSheet" id="file-text" class="form-control {{ $errors->has('timesheet') ? 'is-invalid' : '' }}" value="{{ old('timesheet') }}" autofocus>
                             <input type="file" name="timesheet"  class="file" accept=".csv"  style="visibility: hidden; position: absolute">
 
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-image"></span>
+                                    <span class="fas fa-file-upload"></span>
                                 </div>
                                 <button type="button" class="browse btn btn-primary ">Browse ...</button>
                             </div>
@@ -56,7 +57,7 @@
     </div>
 @stop
 
-@section("JS")
+@section("js")
     <script>
         $(document).on("click", ".browse", function() {
             let file = $(this).parents().find(".file");

@@ -174,14 +174,7 @@ class TimesheetController extends Controller
             "timesheet" => "required|mimes:csv,txt",
         ]);
 
-        try {
-            Excel::import(new TimesheetsImport, $request->file("timesheet"));
-        } catch (Exception $e) {
-            report($e);
-
-            return redirect(route("timesheets.index"))
-                ->with("error", "Something went Wrong!");
-        }
+        Excel::import(new TimesheetsImport, $request->file("timesheet"));
 
         return redirect(route("timesheets.index"))
             ->with("success", "TimeSheet Uploaded Successfully");
