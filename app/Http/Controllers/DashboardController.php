@@ -18,10 +18,8 @@ class DashboardController extends Controller
     {
         $data["total_hours"] = Cache::remember('total_hours', config('constants.time.half_day'),
                                                 function (){
-                                                    $this->get_total_billable_hours();
+                                                    return $this->get_total_billable_hours();
                                                 });
-
-
 
         $data["total_revenue"] = Cache::remember('total_revenue', config('constants.time.half_day'),
                                                 function (){
