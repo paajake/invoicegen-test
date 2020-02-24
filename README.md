@@ -24,8 +24,9 @@ This is a PHP based application with Laravel Framework for Backend and AdminLTE 
    2. Rename `.env.example` to `.env`
    3. Create a new mysql database and update `.env` with it's name and access credentials
    4. OPTIONAL : If you'd prefer to use `S3` for file storage, add this configuration line `FILESYSTEM_DRIVER=s3` to your `.env` file and update the AWS section of the `.env`
-   5. If you'd need password reset, fill the SMTP section of the `.env` file
-   6. From a terminal, change directory to the root folder of the project and run `composer install` to install the dependencies of the app, and run `composer artisan key:generate` when successfully completed to generate an encryption key for the app.
-   7. Run `composer artisan migrate` to create the database structure of the app in mysql.
-   8. Run `composer artisan db:seed` to seed the database with dummy data.
-   9. Visit the base url of the app and login with this credential `Email : admin@invoicegen.test ` `Password : admin1234`
+   5. Run `php artisan storage:link` to create a public accessible point to the app's file storage.
+   6. If you'd need password reset, fill the SMTP section of the `.env` file
+   7. From a terminal, change directory to the root folder of the project and run `composer install` to install the dependencies of the app, and run `composer artisan key:generate` when successfully completed to generate an encryption key for the app.
+   8. Run `composer artisan migrate` to create the database structure of the app in mysql.
+   9. Run `composer artisan db:seed` to seed the database with dummy data.
+   10. Visit the base url of the app and login with this credential `Email : admin@invoicegen.test ` `Password : admin1234`
