@@ -31,7 +31,7 @@ class LawyerControllerTest extends TestCase
             ->assertSeeText("Manage Lawyers")
             ->assertSeeText("Add")
             ->assertSeeTextInOrder([
-                "No",
+                "ID",
                 "Name",
                 "Image",
                 "Rank",
