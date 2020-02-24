@@ -152,6 +152,7 @@ Period: {{$period}}
         <tfoot>
         <tr>
             <td colspan="1"></td>
+            <td colspan="1"></td>
             <td align="left">Total</td>
             <td align="left" class="gray">GHS {{number_format($invoice_sum,2)}}</td>
         </tr>

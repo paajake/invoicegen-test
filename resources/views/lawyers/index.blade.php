@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Ranks')
+@section('title', 'Lawyers')
 
 @section('content_header')
 {{--    <h1 class="m-0 text-dark">Dashboard</h1>--}}
@@ -33,7 +33,8 @@
                 <table id="lawyersDataTable" class="table table-hover table-bordered data-table">
                     <thead>
                     <tr>
-                        <th>No</th>
+{{--                        <th>No</th>--}}
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Image</th>
                         <th>Rank</th>
@@ -65,7 +66,8 @@
                 stateSave: true,
                 ajax: "{{ route('lawyers.index') }}",
                 columns: [
-                    {data: 'rownum', name: 'rownum', searchable: false},
+                    // {data: 'rownum', name: 'rownum', searchable: false},
+                    {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
                     {data: 'image', name: 'image', orderable: false, searchable: false},
                     {data: 'rank', name: 'rank'},

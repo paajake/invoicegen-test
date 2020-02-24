@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Http\Requests\StoreTimesheet;
+use App\Imports\TimesheetsImport;
 use App\Lawyer;
 use App\Timesheet;
 use Illuminate\Http\RedirectResponse;
@@ -11,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class TimesheetController extends Controller
@@ -164,5 +166,29 @@ class TimesheetController extends Controller
         $timesheet->delete();
 
         return Cache::decrement('timesheets_count');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            "timesheet" => "required|mimes:csv,txt",
+        ]);
+
+        try {
+            Excel::import(new TimesheetsImport, $request->file("timesheet"));
+        } catch (Exception $e) {
+            report($e);
+
+            return redirect(route("timesheets.index"))
+                ->with("error", "Something went Wrong!");
+        }
+
+        return redirect(route("timesheets.index"))
+            ->with("success", "TimeSheet Uploaded Successfully");
+    }
+
+    public function upload()
+    {
+        return view("timesheets.upload");
     }
 }
