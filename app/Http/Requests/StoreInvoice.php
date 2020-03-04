@@ -23,14 +23,11 @@ class StoreInvoice extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $url_arr = explode('/',$this->url());
-        $url_id = $url_arr[count($url_arr) - 1];
-
         $start_date = $this->get("date_range") ? explode(' - ', $this->get("date_range"))[0]. " 00:00:00" : null;
         $end_date = $this->get("date_range") ? explode(' - ', $this->get("date_range"))[1] . " 23:59:59" : null;
 
         $this->merge([
-            'id' =>  $url_id,
+            'id' =>  $this->segment(2),
             'start_date' => $start_date,
             "end_date" => $end_date,
         ]);
