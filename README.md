@@ -4,7 +4,7 @@
 <a href="https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=paajake/invoicegen-test&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/b44d1d29abdf4cbd9a2ac359b4c20425"/></a>
 <a href="https://travis-ci.org/paajake/invoicegen-test"><img src="https://travis-ci.org/paajake/invoicegen-test.svg?branch=master" alt="Build Status"></a>
 <a href="https://codecov.io/gh/paajake/invoicegen-test">
-  <img src="https://codecov.io/gh/paajake/invoicegen-test/branch/master/graph/badge.svg" />
+  <imgz src="https://codecov.io/gh/paajake/invoicegen-test/branch/master/graph/badge.svg" />
 </a>
 </p>
 
@@ -27,6 +27,5 @@ This is a PHP based application with Laravel Framework for Backend and AdminLTE 
    5. Run `php artisan storage:link` to create a public accessible point to the app's file storage.
    6. If you'd need password reset, fill the SMTP section of the `.env` file
    7. From a terminal, change directory to the root folder of the project and run `composer install` to install the dependencies of the app, and run `composer artisan key:generate` when successfully completed to generate an encryption key for the app.
-   8. Run `composer artisan migrate` to create the database structure of the app in mysql.
-   9. Run `composer artisan db:seed` to seed the database with dummy data.
-   10. Visit the base url of the app in a browser and login with this credential `Email : admin@invoicegen.test ` and `Password : admin1234`
+   8. Run `php artisan migrate --seed` to create the database structure of the app in mysql, and seed it with dummy data.
+   9. Visit the base url of the app in a browser and login with this credential `Email : admin@invoicegen.test ` and `Password : admin1234`

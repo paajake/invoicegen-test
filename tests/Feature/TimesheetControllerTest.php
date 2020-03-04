@@ -124,7 +124,7 @@ class TimesheetControllerTest extends TestCase
             ->assertJsonCount(1, "data")
             ->assertJsonFragment([
                 "lawyer" => e($lawyer),
-                "client" => $random_client->name,
+                "client" => e($random_client->name),
                 "day" => $start_time->format("d/m/y"),
                 "start_time" => $start_time->format("H:i"),
                 "end_time" => $end_time->format("H:i"),
@@ -159,7 +159,7 @@ class TimesheetControllerTest extends TestCase
             ->assertJsonCount(2, "data")
             ->assertJsonMissingExact([
                 "lawyer" => e($lawyer),
-                "client" => $random_client->name,
+                "client" => e($random_client->name),
                 "day" => $random_timesheet->start_time->format("d/m/y"),
                 "start_time" => $random_timesheet->start_time->format("H:i"),
                 "end_time" => $random_timesheet->end_time->format("H:i"),
