@@ -17,6 +17,7 @@ class UsersControllerTest extends TestCase
     /**
      * Test Index Page.
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_index_page()
@@ -36,6 +37,7 @@ class UsersControllerTest extends TestCase
      * Test for users data
      *
      * @test
+     * @watch
      */
     public function user_can_access_users_data()
     {
@@ -54,6 +56,7 @@ class UsersControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_user_create_page()
@@ -74,6 +77,7 @@ class UsersControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_add_user()
     {
@@ -114,6 +118,7 @@ class UsersControllerTest extends TestCase
     /**
      * Test for Deleting Users
      * @test
+     * @watch
      */
     public function user_can_delete_users()
     {
@@ -137,6 +142,7 @@ class UsersControllerTest extends TestCase
     /**
      * Test for Updating User
      * @test
+     * @watch
      */
     public function user_can_update_account()
     {

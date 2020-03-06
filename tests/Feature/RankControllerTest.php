@@ -14,6 +14,7 @@ class RankControllerTest extends TestCase
     /**
      * Test Ranks Page.
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_ranks()
@@ -32,6 +33,7 @@ class RankControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_access_ranks_data(){
         $random_rank = factory("App\Rank", 8)->create()->random();
@@ -50,6 +52,7 @@ class RankControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_ranks_create_page()
@@ -69,6 +72,7 @@ class RankControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_add_rank(){
         $user = factory("App\User")->create();
@@ -97,6 +101,7 @@ class RankControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_delete_rank(){
         $random_rank = factory("App\Rank", 3)->create()->random();
@@ -118,6 +123,7 @@ class RankControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_update_rank(){
         $user = factory("App\User")->create();

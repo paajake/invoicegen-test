@@ -14,6 +14,7 @@ class ClientControllerTest extends TestCase
     /**
      * Test Ranks Page.
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_clients()
@@ -32,6 +33,7 @@ class ClientControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_access_clients_data(){
         $random_client = factory("App\Client", 8)->create()->random();
@@ -51,6 +53,7 @@ class ClientControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_clients_create_page()
@@ -70,6 +73,7 @@ class ClientControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_add_client(){
         $user = factory("App\User")->create();
@@ -101,6 +105,7 @@ class ClientControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_delete_client(){
         $random_client = factory("App\Client", 3)->create()->random();
@@ -123,6 +128,7 @@ class ClientControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_update_client(){
         $user = factory("App\User")->create();

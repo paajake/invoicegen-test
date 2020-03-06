@@ -18,6 +18,7 @@ class LawyerControllerTest extends TestCase
     /**
      * Test Lawyers Page.
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_lawyers()
@@ -46,6 +47,7 @@ class LawyerControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_access_lawyers_data()
     {
@@ -74,6 +76,7 @@ class LawyerControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_lawyers_create_page()
@@ -95,6 +98,7 @@ class LawyerControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_add_lawyer(){
         $ranks = factory("App\Rank", 6)->create();
@@ -147,6 +151,7 @@ class LawyerControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_delete_lawyer(){
         $ranks = factory("App\Rank", 6)->create();
@@ -198,6 +203,7 @@ class LawyerControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_update_lawyer(){
         $random_rank = factory("App\Rank", 6)->create()->random();

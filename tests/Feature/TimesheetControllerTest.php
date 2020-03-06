@@ -15,6 +15,7 @@ class TimesheetControllerTest extends TestCase
     /**
      * Test Lawyers Page.
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_timesheets()
@@ -41,6 +42,7 @@ class TimesheetControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_access_timesheets_data()
     {
@@ -73,6 +75,7 @@ class TimesheetControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      * @return void
      */
     public function user_can_view_timesheets_create_page()
@@ -92,6 +95,7 @@ class TimesheetControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_add_timesheet(){
         $ranks = factory("App\Rank", 6)->create();
@@ -134,6 +138,7 @@ class TimesheetControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_delete_timesheet(){
         $ranks = factory("App\Rank", 6)->create();
@@ -169,6 +174,7 @@ class TimesheetControllerTest extends TestCase
 
     /**
      * @test
+     * @watch
      */
     public function user_can_update_timesheet(){
         $ranks = factory("App\Rank", 6)->create();

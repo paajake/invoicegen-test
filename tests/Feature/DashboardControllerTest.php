@@ -12,6 +12,7 @@ class DashboardControllerTest extends TestCase
     /**
      * A basic feature test example.
      * @test
+     * @watch
      * @return void
      */
     public function user_can_access_dashboard()
