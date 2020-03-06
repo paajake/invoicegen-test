@@ -11,15 +11,17 @@
 |
 */
 
-Auth::routes(['register' => false]);
+Auth::routes(["register" => false]);
 
-Route::get('/', 'DashboardController@index')->name('dashboard')->middleware('auth');
+Route::middleware("auth")->group( function () {
+    Route::get("/", "DashboardController@index")->name("dashboard");
 
-Route::resource("invoices", "InvoiceController")->middleware('auth');
-Route::post('timesheets/import', 'TimesheetController@import')->name('timesheets.import')->middleware("auth");
-Route::get('timesheets/upload', 'TimesheetController@upload')->name('timesheets.upload')->middleware("auth");
-Route::resource("timesheets", "TimesheetController")->middleware('auth');
-Route::resource("lawyers", "LawyerController")->middleware('auth');
-Route::resource("ranks", "RankController")->middleware('auth');
-Route::resource("clients", "ClientController")->middleware('auth');
-Route::resource("users", "UsersController")->middleware('auth');
+    Route::resource("invoices", "InvoiceController");
+    Route::post("timesheets/import", "TimesheetController@import")->name("timesheets.import");
+    Route::get("timesheets/upload", "TimesheetController@upload")->name("timesheets.upload");
+    Route::resource("timesheets", "TimesheetController");
+    Route::resource("lawyers", "LawyerController");
+    Route::resource("ranks", "RankController");
+    Route::resource("clients", "ClientController");
+    Route::resource("users", "UsersController");
+});
