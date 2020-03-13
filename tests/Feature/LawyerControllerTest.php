@@ -100,7 +100,8 @@ class LawyerControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_add_lawyer(){
+    public function user_can_add_lawyer()
+    {
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 6)->create();
 
@@ -153,12 +154,14 @@ class LawyerControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_delete_lawyer(){
+    public function user_can_delete_lawyer()
+    {
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 6)->create();
 
         $random_lawyer = factory("App\Lawyer", 3)->create()->random();
-        $random_lawyer_name = $random_lawyer->first_name. ' '.$random_lawyer->last_name. ' '. $titles->find($random_lawyer->title_id)->title;
+        $random_lawyer_name = $random_lawyer->first_name. ' '.$random_lawyer->last_name.
+                                ' '. $titles->find($random_lawyer->title_id)->title;
         $random_lawyer_rank = $ranks->find($random_lawyer->rank_id)->name;
 
         $user = factory("App\User")->create();
@@ -205,7 +208,8 @@ class LawyerControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_update_lawyer(){
+    public function user_can_update_lawyer()
+    {
         $random_rank = factory("App\Rank", 6)->create()->random();
         $random_title = factory("App\Title", 6)->create()->random();
 
@@ -232,7 +236,7 @@ class LawyerControllerTest extends TestCase
                 "addon_rate" => $fake_addon_rate,
             ])
             ->assertRedirect("lawyers/")
-            ->assertSessionHas("success","Lawyer Successfully Updated!");
+            ->assertSessionHas("success", "Lawyer Successfully Updated!");
 
         $response = $this->actingAs($user)->get("lawyers/$random_lawyer->id/edit");
 

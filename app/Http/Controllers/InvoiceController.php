@@ -70,12 +70,13 @@ class InvoiceController extends Controller
             ->filterColumn('end_date', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(invoices.end_date,'%d/%m/%y') like ?", ["%$keyword%"]);
             })
-            ->addColumn('action', function($row){
+            ->addColumn('action', function($row)
+    {
                 return "<a href='". Storage::url("public/docs/gen/".$row->invoice)."' target='_blank'
                         class='btn btn-primary btn-sm mr-1 mb-1' data-toggle='tooltip' title='Download Invoice'>
                         <i class='fas fa-download'></i> <span class='d-none d-md-inline'>Download</span></a>
 
-                        <a href='".route("invoices.edit",["invoice" => $row->id])."'
+                        <a href='".route("invoices.edit", ["invoice" => $row->id])."'
                         class='btn btn-success btn-sm mr-1 mb-1' data-toggle='tooltip' title='Edit Invoice'>
                         <i class='fas fa-edit'></i> <span class='d-none d-md-inline'>Edit</span></a>
 

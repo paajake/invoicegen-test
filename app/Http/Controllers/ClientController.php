@@ -59,7 +59,7 @@ class ClientController extends Controller
             })
             ->addColumn('action', function($row)
             {
-                return "<a href='".route("clients.edit",["client" => $row->id])."'
+                return "<a href='".route("clients.edit", ["client" => $row->id])."'
                         class='btn btn-success btn-sm mr-1 mb-1' data-toggle='tooltip' title='Edit Client'>
                         <i class='fas fa-edit'></i> <span class='d-none d-md-inline'>Edit</span></a>
 

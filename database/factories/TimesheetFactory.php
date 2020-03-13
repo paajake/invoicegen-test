@@ -11,9 +11,9 @@ $factory->define(Timesheet::class, function (Faker $faker) {
     $start_time = Carbon::today()->addHours($faker->numberBetween(5, 8));
 
     return [
-        'lawyer_id' => $faker->numberBetween(1,10),
-        'client_id' => $faker->numberBetween(1,20),
+        'lawyer_id' => $faker->numberBetween(1, 10),
+        'client_id' => $faker->numberBetween(1, 20),
         'start_time' => $start_time->toDateTimeString(),
-        'end_time' => $start_time->addHours($faker->numberBetween(3,12))->toDateTimeString(),
+        'end_time' => $start_time->addHours($faker->numberBetween(3, 12))->toDateTimeString(),
    ];
 });

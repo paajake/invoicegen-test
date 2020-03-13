@@ -97,7 +97,7 @@ class UsersControllerTest extends TestCase
                     "password_confirmation" => $fake_password,
                 ])
             ->assertRedirect("/users")
-            ->assertSessionHas("success","User Successfully Created!");
+            ->assertSessionHas("success", "User Successfully Created!");
 
 
         $response = $this->actingAs($user)->ajaxGet("/users");
@@ -162,7 +162,7 @@ class UsersControllerTest extends TestCase
                 "password_confirmation" => $fake_password,
             ])
             ->assertRedirect("users/$user->id/edit")
-            ->assertSessionHas("success","Account Successfully Updated!");
+            ->assertSessionHas("success", "Account Successfully Updated!");
 
         $response = $this->actingAs($user)->get("users/$user->id/edit");
 

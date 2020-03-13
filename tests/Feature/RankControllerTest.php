@@ -35,7 +35,8 @@ class RankControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_access_ranks_data(){
+    public function user_can_access_ranks_data()
+    {
         $random_rank = factory("App\Rank", 8)->create()->random();
 
         $user = factory("App\User")->create();
@@ -74,7 +75,8 @@ class RankControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_add_rank(){
+    public function user_can_add_rank()
+    {
         $user = factory("App\User")->create();
 
         $fake_rank = $this->faker->jobTitle;
@@ -87,7 +89,7 @@ class RankControllerTest extends TestCase
                     "rate" => number_format($fake_rate, 2, '.', ""),
                 ])
             ->assertRedirect("ranks")
-            ->assertSessionHas("success","Rank Successfully Created!");
+            ->assertSessionHas("success", "Rank Successfully Created!");
 
         $response = $this->actingAs($user)->ajaxGet("/ranks");
 
@@ -103,7 +105,8 @@ class RankControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_delete_rank(){
+    public function user_can_delete_rank()
+    {
         $random_rank = factory("App\Rank", 3)->create()->random();
         $user = factory("App\User")->create();
 
@@ -125,7 +128,8 @@ class RankControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_update_rank(){
+    public function user_can_update_rank()
+    {
         $user = factory("App\User")->create();
 
         $random_rank = factory("App\Rank", 5)->create()->random();
@@ -141,11 +145,11 @@ class RankControllerTest extends TestCase
                 "rate" => number_format($fake_rate, 2, '.', ""),
             ])
             ->assertRedirect("ranks/")
-            ->assertSessionHas("success","Rank Successfully Updated!");
+            ->assertSessionHas("success", "Rank Successfully Updated!");
         ;
 
         $response = $this->actingAs($user)->get("ranks/$random_rank->id/edit");
 
-        $response->assertSeeInOrder([e($fake_rank),$fake_rate, "Edit Rank"]);
+        $response->assertSeeInOrder([e($fake_rank), $fake_rate, "Edit Rank"]);
     }
 }

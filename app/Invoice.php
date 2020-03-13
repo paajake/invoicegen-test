@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use PDF;
+
 class Invoice extends Model
 {
     protected $fillable = ["start_date", "end_date", "client_id", "invoice"];
@@ -19,7 +20,8 @@ class Invoice extends Model
      * @param StoreInvoice $request
      * @return array
      */
-    public static function  preProcess(StoreInvoice $request){
+    public static function  preProcess(StoreInvoice $request)
+    {
 
         $invoice_attributes = $request->validated();
         $invoice_attributes["invoice"] = time().".pdf";
@@ -52,7 +54,8 @@ class Invoice extends Model
                     ");
 
         $invoice_sum = 0;
-        foreach ($billables as $billable){
+        foreach ($billables as $billable)
+        {
             $invoice_sum += $billable->total_rate;
         }
 

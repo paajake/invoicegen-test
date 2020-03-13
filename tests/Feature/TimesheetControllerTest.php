@@ -97,7 +97,8 @@ class TimesheetControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_add_timesheet(){
+    public function user_can_add_timesheet()
+    {
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 5)->create();
         $lawyers = factory("App\Lawyer", 12)->create();
@@ -120,7 +121,7 @@ class TimesheetControllerTest extends TestCase
                     "end_time" => $end_time->toDateTimeString(),
                 ])
             ->assertRedirect("timesheets")
-            ->assertSessionHas("success","TimeSheet Successfully Added!");
+            ->assertSessionHas("success", "TimeSheet Successfully Added!");
 
         $response = $this->actingAs($user)->ajaxGet("/timesheets");
 
@@ -140,7 +141,8 @@ class TimesheetControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_delete_timesheet(){
+    public function user_can_delete_timesheet()
+    {
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 5)->create();
         $lawyers = factory("App\Lawyer", 12)->create();
@@ -176,7 +178,8 @@ class TimesheetControllerTest extends TestCase
      * @test
      * @watch
      */
-    public function user_can_update_timesheet(){
+    public function user_can_update_timesheet()
+    {
         $ranks = factory("App\Rank", 6)->create();
         $titles = factory("App\Title", 5)->create();
         $lawyers = factory("App\Lawyer", 12)->create();
@@ -202,7 +205,7 @@ class TimesheetControllerTest extends TestCase
                 "end_time" => $end_time->toDateTimeString(),
             ])
             ->assertRedirect("/timesheets")
-            ->assertSessionHas("success","TimeSheet Successfully Updated!");
+            ->assertSessionHas("success", "TimeSheet Successfully Updated!");
 
         $response = $this->actingAs($user)->get("timesheets/$random_timesheet->id/edit");
 

@@ -148,7 +148,7 @@ class ClientControllerTest extends TestCase
                 "phone" => $fake_phone,
             ])
             ->assertRedirect("/clients")
-            ->assertSessionHas("success","Client Successfully Updated!");
+            ->assertSessionHas("success", "Client Successfully Updated!");
         ;
 
         $response = $this->actingAs($user)->get("clients/$random_client->id/edit");
