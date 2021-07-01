@@ -2,6 +2,7 @@
 <h1 align="center"><b>Invoice</b>Gen</h1>
 <p align="center">
 <a href="https://www.codefactor.io/repository/github/paajake/invoicegen-test"><img src="https://www.codefactor.io/repository/github/paajake/invoicegen-test/badge" alt="CodeFactor" /></a>
+<a href="https://codeclimate.com/github/paajake/invoicegen-test/maintainability"><img src="https://api.codeclimate.com/v1/badges/55657735fb1258fe4ae4/maintainability" /></a>
 <a href="https://travis-ci.org/paajake/invoicegen-test"><img src="https://travis-ci.org/paajake/invoicegen-test.svg?branch=master" alt="Build Status"></a>
 <a href="https://codecov.io/gh/paajake/invoicegen-test">
   <img src="https://codecov.io/gh/paajake/invoicegen-test/branch/master/graph/badge.svg" />
